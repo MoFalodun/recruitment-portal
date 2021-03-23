@@ -32,7 +32,7 @@ const applicationSchema = Joi.object({
   address: Joi.string().min(3).max(100).required(),
   university: Joi.string().required(),
   course: Joi.string().min(3).max(100).required(),
-  cgpa: Joi.number().integer().less(8).positive().precision(2).required(),
+  cgpa: Joi.number().less(8).positive().precision(2).required(),
 });
 
 module.exports = {
