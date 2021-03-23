@@ -1,4 +1,4 @@
-const { addUser, getUserByEmail, addUserApplication } = require("../services");
+const { addUser, getUserByEmail, addUserApplication, getAllUsers } = require("../services");
 const { hashPassword, comparePassword, addDataToToken } = require("../utils");
 const addNewUser = async (req, res) => {
   try {
@@ -78,8 +78,27 @@ const loginUser = async (req, res) => {
   }
 };
 
+const allUsers = async (req, res) => {
+  try {
+    const users = await getAllUsers();
+    
+    res.status(200).json({
+      status: 'success',
+      message: 'Users fetched successfully.',
+      data: users,
+    });
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({
+      status: 'fail',
+      message: 'Something went wrong ',
+    });
+  }
+};
+
 module.exports = {
   addNewUser,
   loginUser,
   addNewApplication,
+  allUsers,
 };

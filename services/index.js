@@ -6,6 +6,7 @@ const {
   updateUserDetails,
   addUserApplication,
   getApplicationByUser,
+  getAllUsers,
 } = require("./user");
 
 const { addQuestion, getQuestionByTitle } = require("./question");
@@ -20,4 +21,5 @@ module.exports = {
   getQuestionByTitle,
   addUserApplication,
   getApplicationByUser,
+  getAllUsers,
 };

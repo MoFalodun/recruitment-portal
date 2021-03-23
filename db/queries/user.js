@@ -64,6 +64,6 @@ module.exports = {
 
   fetchUserByEmail: "SELECT * FROM user_info WHERE email = $1",
   fetchUserById: "SELECT * FROM user_info WHERE id = $1",
-
+  fetchAllUsers: "SELECT * FROM user_info",
   fetchUserProfile: "SELECT * FROM user_application WHERE user_id = $1",
 };
