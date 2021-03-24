@@ -19,7 +19,7 @@ module.exports = {
     RETURNING *;
   `,
 
-  fetchQuestionsById: 'SELECT id, title, option_a, option_b, option_c FROM questions WHERE id = $1',
+  fetchAllQuestions: 'SELECT id, title, option_a, option_b, option_c FROM questions',
   fetchQuestionsByTitle: 'SELECT id, title, option_a, option_b, option_c FROM questions WHERE title = $1',
 
   updateQuestionsById: `

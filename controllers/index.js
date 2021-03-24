@@ -4,7 +4,7 @@ const {
   addNewApplication,
   allUsers,
 } = require("./user");
-const { addNewQuestion, getQuestion } = require("./question");
+const { addNewQuestion, getAllQuestion } = require("./question");
 const { loginAdmin, addNewAdmin } = require("./admin");
 
 module.exports = {
@@ -15,5 +15,5 @@ module.exports = {
   allUsers,
   loginAdmin,
   addNewAdmin,
-  getQuestion,
+  getAllQuestion,
 };

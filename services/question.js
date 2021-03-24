@@ -1,6 +1,6 @@
 const db = require('../db/setup');
 const { generateUUID } = require('../utils');
-const { insertQuestions, fetchQuestionsByTitle, fetchQuestionsById } = require('../db/queries/question')
+const { insertQuestions, fetchQuestionsByTitle, fetchAllQuestions } = require('../db/queries/question')
 
 const addQuestion= async (data) => {
     const id = generateUUID;
@@ -10,10 +10,10 @@ const addQuestion= async (data) => {
 
 const getQuestionByTitle = async (title) => db.oneOrNone(fetchQuestionsByTitle, [title])
 
-const getQuestionByID = async (id) => db.oneOrNone(fetchQuestionsById, [id])
+const getQuestions = async () => db.manyOrNone(fetchAllQuestions)
 
 module.exports = {
     addQuestion,
     getQuestionByTitle,
-    getQuestionByID,
+    getQuestions,
 }
