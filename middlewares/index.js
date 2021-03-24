@@ -1,6 +1,9 @@
 const { authenticate, adminAccessValidator, authenticateAdmin } = require("./auth");
 const { validateSignup, validateLogin, checkIfUserExists, validateApplication, authenticateEmail, checkForUserProfile } = require("./user");
 const { validateQuestions, checkIfQuestionExists } = require("./question");
+const { checkIfAdminExists,
+  validateAdminLogin,
+  validateAdminSignup } = require("./admin")
 
 module.exports = {
   authenticate,
@@ -13,4 +16,7 @@ module.exports = {
   validateApplication,
   authenticateEmail,
   checkForUserProfile,
+  checkIfAdminExists,
+  validateAdminLogin,
+  validateAdminSignup,
 };

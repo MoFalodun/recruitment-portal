@@ -1,4 +1,6 @@
 const { userRouter } = require('./user');
 
+const { adminRouter } = require('./admin');
 
-module.exports = { userRouter };
+
+module.exports = { userRouter, adminRouter };

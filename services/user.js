@@ -8,6 +8,7 @@ const {
   insertUserApplication,
   fetchUserProfile,
   fetchAllUsers,
+  fetchUserApplicationByEmail,
 } = require("../db/queries/user");
 const { insertApplicationTable } = require("../db/queries/computation")
 
@@ -35,6 +36,8 @@ const addUserApplication = async (data) => {
     university,
     course,
     cgpa,
+    cv,
+    picture,
     userId,
   } = data;
   return db.one(insertUserApplication, [
@@ -47,6 +50,8 @@ const addUserApplication = async (data) => {
     university,
     course,
     cgpa,
+    cv,
+    picture,
     userId,
   ]);
 };
@@ -64,8 +69,8 @@ const getAllUsers = async () => db.manyOrNone(fetchAllUsers);
 //     return db.one(insertAdmin, [id, email, firstName, lastName, phoneNumber, isAdmin, password ])
 // }
 
-const getUserByUsername = async (userName) =>
-  db.oneOrNone(fetchUserByUserName, [userName]);
+const getUserApplicationByEmail = async (email) =>
+  db.oneOrNone(fetchUserApplicationByEmail, [email]);
 const getUserById = async (id) => db.oneOrNone(fetchUserById, [id]);
 const updateUserDetails = async (data, userId) => {
   const { email, firstName, lastName, userName } = data;
@@ -74,11 +79,11 @@ const updateUserDetails = async (data, userId) => {
 
 module.exports = {
   addUser,
-  getUserByUsername,
   getUserById,
   updateUserDetails,
   getUserByEmail,
   addUserApplication,
   getApplicationByUser,
   getAllUsers,
+  getUserApplicationByEmail,
 };

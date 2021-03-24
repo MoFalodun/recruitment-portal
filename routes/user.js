@@ -12,10 +12,6 @@ userRouter.post('/signup', validateSignup, checkIfUserExists, addNewUser );
 // for user login
 userRouter.post('/login', validateLogin, loginUser, );
 //for application
-userRouter.post('/apply', authenticate,  validateApplication, checkForUserProfile, authenticateEmail, addNewApplication )
-// for admin to create question
-userRouter.post('/admin/createQuestion', adminAccessValidator, validateQuestions, checkIfQuestionExists,  addNewQuestion)
-// userRouter.post('/signup/admin', validateAdminSignup, checkIfUserExists, addAdminUser);
-userRouter.get('/users', allUsers)
+userRouter.post('/apply', authenticate,  validateApplication, checkForUserProfile, authenticateEmail, addNewApplication );
 
 module.exports = { userRouter }

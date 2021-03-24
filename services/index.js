@@ -1,6 +1,6 @@
 const {
   addUser,
-  getUserByUsername,
+  getUserApplicationByEmail,
   getUserById,
   getUserByEmail,
   updateUserDetails,
@@ -9,11 +9,14 @@ const {
   getAllUsers,
 } = require("./user");
 
+const { addAdmin,
+  getAdminByEmail,} = require("./admin")
+
 const { addQuestion, getQuestionByTitle } = require("./question");
 
 module.exports = {
   addUser,
-  getUserByUsername,
+  getUserApplicationByEmail,
   getUserById,
   updateUserDetails,
   getUserByEmail,
@@ -22,4 +25,6 @@ module.exports = {
   addUserApplication,
   getApplicationByUser,
   getAllUsers,
+  addAdmin,
+  getAdminByEmail,
 };
