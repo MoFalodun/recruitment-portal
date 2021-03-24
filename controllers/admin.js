@@ -26,6 +26,7 @@ const loginAdmin = async (req, res) => {
       delete admin.password;
       const token = addDataToToken({
         email,
+        isAdmin: admin.is_admin,
         id: admin.id,
       });
       return res
