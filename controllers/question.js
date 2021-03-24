@@ -1,4 +1,4 @@
-const { addQuestion } = require("../services");
+const { addQuestion, getQuestionByID } = require("../services");
 
 const addNewQuestion = async (req, res) => {
   try {
@@ -16,4 +16,13 @@ const addNewQuestion = async (req, res) => {
   }
 };
 
-module.exports = { addNewQuestion };
+const getQuestion = async (req, res) => {
+  try {
+    await getQuestionByID(req.params.id);
+    res.status(200).json({ status: 'success', message: 'question fetched ' });
+  } catch (error) {
+    res.status(500).json({ status: 'fail', message: 'Something went wrong.' });
+  }
+};
+
+module.exports = { addNewQuestion, getQuestion };

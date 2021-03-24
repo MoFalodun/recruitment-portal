@@ -12,7 +12,7 @@ const {
 const { addAdmin,
   getAdminByEmail,} = require("./admin")
 
-const { addQuestion, getQuestionByTitle } = require("./question");
+const { addQuestion, getQuestionByTitle, getQuestionByID } = require("./question");
 
 module.exports = {
   addUser,
@@ -27,4 +27,5 @@ module.exports = {
   getAllUsers,
   addAdmin,
   getAdminByEmail,
+  getQuestionByID,
 };
