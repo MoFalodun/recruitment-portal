@@ -48,6 +48,7 @@ const validateLogin = (req, res, next) => {
       return res.status(400).json({ status: 'fail', message: error.message });
     } catch (error) {
       console.log(error)
+      console.log(ok)
       return res.status(500).json({ status: 'fail', message: 'Something went wrong.' });
     }
 };

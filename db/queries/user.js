@@ -71,4 +71,12 @@ module.exports = {
   fetchUserById: "SELECT * FROM user_info WHERE id = $1",
   fetchAllUsers: "SELECT * FROM user_info",
   fetchUserProfile: "SELECT * FROM user_application WHERE user_id = $1",
+
+  updateUserPasswordById: `UPDATE user_info
+  SET 
+    email = $1,
+    password = $2,
+    updated_at = NOW()
+  WHERE id = $3
+  RETURNING *;`,
 };
