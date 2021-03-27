@@ -1,6 +1,7 @@
 const { addUser, getUserByEmail, addUserApplication, getAllUsers, getUserApplicationByEmail, updateUserPassword, getUserById } = require("../services");
 const { hashPassword, comparePassword, addDataToToken } = require("../utils");
 const nodemailer = require("nodemailer");
+require('dotenv').config();
 const addNewUser = async (req, res) => {
   try {
     const hashedPassword = hashPassword(req.body.password);
@@ -116,13 +117,14 @@ const singleUser = async (req, res) => {
 };
 
 const resetPassword = async (req, res) => {
+  const password = process.env.PASS_WORD
   let transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
     port: 587,
     secure: false, // true for 465, false for other ports
     auth: {
       user: "mzdoopey10@gmail.com", // generated ethereal user
-      pass: "malibu01", // generated ethereal password
+      pass: password, // generated ethereal password
     },
   });
   try {
