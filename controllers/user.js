@@ -1,5 +1,5 @@
 const { addUser, getUserByEmail, addUserApplication, getAllUsers, getUserApplicationByEmail, updateUserPassword, getUserById } = require("../services");
-const { hashPassword, comparePassword, addDataToToken } = require("../utils");
+const { hashPassword, comparePassword, addDataToToken, verifyToken } = require("../utils");
 const nodemailer = require("nodemailer");
 require('dotenv').config();
 const addNewUser = async (req, res) => {
@@ -117,7 +117,7 @@ const singleUser = async (req, res) => {
 };
 
 const resetPassword = async (req, res) => {
-  const password = process.env.PASS_WORD
+  const password = process.env.PASS_WORD;
   let transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
     port: 587,
@@ -138,8 +138,8 @@ const resetPassword = async (req, res) => {
       from: '"modupe " <mzdoopey10@gmail.com>', // sender address
       to: email, // list of receivers
       subject: "Reset Password", // Subject line
-      text: '<a href="/resetpassword/' + userer.id + '/' + userToken + '">Reset password</a>',
-      html: '<a href="/resetpassword/' + userer.id + '/' + userToken + '">Reset password</a>' // html body
+      text: `<a href="http://localhost:8080/resetpassword/${userToken}">Reset password</a>`,
+      html: `<a href="http://localhost:8080/resetpassword/${userToken}">Reset password</a>` // html body
     });
     res.status(200).json({
       status: 'success',
@@ -156,23 +156,31 @@ const resetPassword = async (req, res) => {
 }
 
 const updatePassword = async (req, res) => {
+  // const { token } = req.params;
   try {
+    const { err, data } = verifyToken(req.params.token);
+    console.log(req.body)
+    console.log(req.params.token)
+    if (err) {
+      console.log(err)
+      return res
+        .status(401)
+        .json({ status: 'fail', message: 'Invalid token' });
+    }
+    const userss = data;
+    console.log(userss)
+    console.log(req.params.token)
     const hashedPassword = hashPassword(req.body.password)
-    const usermail = await getUserById(req.params.id)
-    if (usermail.email === req.body.email) {
-      const updatedUser = await updateUserPassword({ ...req.body, password: hashedPassword}, req.params.id);
+    const updatedUser = await updateUserPassword({ ...req.body, password: hashedPassword}, userss.email);
+    console.log(userss.email)
     res
       .status(201)
       .json({ status: 'success', message: 'Password updated successfully.', data: updatedUser });
-    } else {
-      console.log('usermail')
-      res
-      .status(201)
-      .json({ status: 'fail', message: 'You must be a thief'});
-    }
+
 } catch (error) {
     console.log(error)
-    console.log(usermail)
+    console.log(data)
+    console.log(req.params)
   res.status(500).json({ status: 'fail', message: 'Something went wrong.' });
 }
 };

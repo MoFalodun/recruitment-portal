@@ -16,6 +16,6 @@ userRouter.post('/apply', authenticate,  validateApplication, checkForUserProfil
 // for questions
 userRouter.get('/user/question', authenticate, getAllQuestion );
 userRouter.post('/user/reset', resetPassword );
-userRouter.post('/resetpassword/:id/:token', validateLogin, updatePassword)
+userRouter.put('/resetPassword/:token', updatePassword)
 
 module.exports = { userRouter }

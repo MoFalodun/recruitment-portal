@@ -74,9 +74,8 @@ module.exports = {
 
   updateUserPasswordById: `UPDATE user_info
   SET 
-    email = $1,
-    password = $2,
+    password = $1,
     updated_at = NOW()
-  WHERE id = $3
+  WHERE email = $2
   RETURNING *;`,
 };

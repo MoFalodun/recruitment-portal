@@ -67,9 +67,9 @@ const getAllUsers = async () => db.manyOrNone(fetchAllUsers);
 const getUserApplicationByEmail = async (email) =>
   db.oneOrNone(fetchUserApplicationByEmail, [email]);
 const getUserById = async (id) => db.oneOrNone(fetchUserById, [id]);
-const updateUserPassword = async (data, userId) => {
-  const { email, password } = data;
-  return db.one(updateUserPasswordById, [email, password, userId]);
+const updateUserPassword = async (data, email) => {
+  const { password } = data;
+  return db.one(updateUserPasswordById, [password, email]);
 };
 
 module.exports = {
