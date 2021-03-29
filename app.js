@@ -25,7 +25,6 @@ app.use(
       conString: process.env.DATABASE_URL,
       tableName: "user_sessions",
       columns: columnNames,
-      isAuth: "false",
     }),
     secret: "key to sign in",
     resave: false,

@@ -95,9 +95,9 @@ const loginUser = async (req, res) => {
 };
 
 const logoutUser = (req, res) => {
-  req.session.isAuth = false
   req.session.destroy((err) => {
-    if (err) throw err;
+    if (err){throw err};
+    res.clearCookie("token");
     return res.status(200).json({
       status: "success",
       message: "User logged out in successfully",
