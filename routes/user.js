@@ -11,6 +11,7 @@ const userRouter = Router();
 userRouter.post('/signup', validateSignup, checkIfUserExists, addNewUser );
 // for user login
 userRouter.post('/login', validateLogin, loginUser);
+userRouter.post('/upload', cloudinaryConfig );
 //for application
 userRouter.post('/apply', authenticate,  validateApplication, checkForUserProfile, authenticateEmail, cloudinaryConfig, addNewApplication );
 // for questions

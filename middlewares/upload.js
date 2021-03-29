@@ -1,8 +1,7 @@
-const cloudinary = require('cloudinary');
+const cloudinary = require('cloudinary').v2;
 const Datauri = require('datauri');
 const { config } = require('dotenv');
 
-// const datauri = new Datauri();
 config();
 
 cloudinary.config({
@@ -11,17 +10,20 @@ cloudinary.config({
     api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-const cloudinaryConfig = async(file, next) => {
-    try {
-        Datauri.format('.png', file.buffer);
-        const fileBuffer = datauri.content;
-        await cloudinary.v2.uploader.upload(fileBuffer);
-        return next();
-    } catch (error) {
-        console.log(error)
-        console.log(ok)
-        return (error)
-    }
+const cloudinaryConfig = async(req, res, next) => {
+       try {
+        const file = req.files.photo;
+        console.log(file)
+        cloudinary.uploader.upload(file.tempFilePath, (err, result) => {
+            res.status(200).json({
+                status: "success",
+                result
+              });
+        });
+       } catch (error) {
+            console.log(error)
+            return (error)
+        }
 };
 
 module.exports = {
