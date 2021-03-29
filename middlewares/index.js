@@ -21,4 +21,5 @@ module.exports = {
   validateAdminLogin,
   validateAdminSignup,
   isAuth,
+  cloudinaryConfig
 };

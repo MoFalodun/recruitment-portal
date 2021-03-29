@@ -2,7 +2,7 @@ const cloudinary = require('cloudinary');
 const Datauri = require('datauri');
 const { config } = require('dotenv');
 
-const datauri = new Datauri();
+// const datauri = new Datauri();
 config();
 
 cloudinary.config({
@@ -13,7 +13,7 @@ cloudinary.config({
 
 const cloudinaryConfig = async(file) => {
     try {
-        datauri.format('.png', file.buffer);
+        Datauri.format('.png', file.buffer);
         const fileBuffer = datauri.content;
         const data = await cloudinary.v2.uploader.upload(fileBuffer);
         return data;
