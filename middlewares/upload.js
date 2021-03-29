@@ -11,12 +11,12 @@ cloudinary.config({
     api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-const cloudinaryConfig = async(file) => {
+const cloudinaryConfig = async(file, next) => {
     try {
         Datauri.format('.png', file.buffer);
         const fileBuffer = datauri.content;
-        const data = await cloudinary.v2.uploader.upload(fileBuffer);
-        return data;
+        await cloudinary.v2.uploader.upload(fileBuffer);
+        return next();
     } catch (error) {
         console.log(error)
         console.log(ok)
