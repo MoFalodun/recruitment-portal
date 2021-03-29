@@ -5,6 +5,7 @@ const {
   allUsers,
   resetPassword,
   updatePassword,
+  logoutUser,
 } = require("./user");
 const { addNewQuestion, getAllQuestion } = require("./question");
 const { loginAdmin, addNewAdmin } = require("./admin");
@@ -20,4 +21,5 @@ module.exports = {
   getAllQuestion,
   resetPassword,
   updatePassword,
+  logoutUser
 };

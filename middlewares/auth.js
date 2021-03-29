@@ -1,4 +1,5 @@
 const { verifyToken } = require('../utils');
+const session = require('express-session');
 
 const authenticate = (req, res, next) => {
   try {
@@ -52,4 +53,19 @@ const adminAccessValidator = (req, res, next) => {
   }
 };
 
-module.exports = { authenticate, adminAccessValidator };
+const isAuth = (req, res, next) => {
+  try {
+    if(req.session.isAuth){
+    next()
+  }else{
+    console.log(req.session)
+  }
+}
+  catch (error) {
+    return res
+      .status(500)
+      .json({ status: 'fail', message: 'Something went wrong' });
+  }
+}
+
+module.exports = { authenticate, adminAccessValidator, isAuth };
