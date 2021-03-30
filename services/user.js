@@ -1,5 +1,6 @@
 const db = require("../db/setup");
 const { generateUUID } = require("../utils");
+const cloudinary = require('cloudinary').v2;
 const {
   insertUser,
   fetchUserByEmail,
@@ -57,6 +58,17 @@ const addUserApplication = async (data) => {
   ]);
 };
 
+const cloudinaryConfig = async (cvPath, photoPath) => {
+  try {
+    const cvData = await cloudinary.v2.uploader.upload(cvPath);
+    const photoData = await cloudinary.v2.uploader.upload(photoPath);
+    const data = [cvData, photoData];
+    return data;
+  } catch (error) {
+    return (error);
+  }
+};
+
 const getUserByEmail = async (email) => db.oneOrNone(fetchUserByEmail, [email]);
 
 const getApplicationByUser = async (userId) =>
@@ -81,4 +93,5 @@ module.exports = {
   getApplicationByUser,
   getAllUsers,
   getUserApplicationByEmail,
+  cloudinaryConfig,
 };

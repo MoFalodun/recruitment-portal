@@ -7,6 +7,7 @@ const {
   addUserApplication,
   getApplicationByUser,
   getAllUsers,
+  cloudinaryConfig
 } = require("./user");
 
 const { addAdmin,
@@ -28,4 +29,5 @@ module.exports = {
   addAdmin,
   getAdminByEmail,
   getQuestions,
+  cloudinaryConfig
 };
