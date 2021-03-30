@@ -34,6 +34,7 @@ const addNewUser = async (req, res) => {
 const addNewApplication = async (req, res) => {
   try {
     const userID = req.user.id;
+    console.log(req.body)
     const newApplication = await addUserApplication({
       ...req.body,
       userId: userID,
@@ -163,8 +164,8 @@ const resetPassword = async (req, res) => {
       from: '"Enyata " <mzdoopey10@gmail.com>', // sender address
       to: email, // list of receivers
       subject: "Reset Password", // Subject line
-      text: `<a href="http://localhost:8080/resetpassword/${userToken}">Reset password</a>`,
-      html: `<a href="http://localhost:8080/resetpassword/${userToken}">Reset password</a>`, // html body
+      text: `<a href="http://localhost:8081/resetpassword/${userToken}">Reset password</a>`,
+      html: `<a href="http://localhost:8081/resetpassword/${userToken}">Reset password</a>`, // html body
     });
     res.status(200).json({
       status: "success",

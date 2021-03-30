@@ -16,7 +16,16 @@ const loginAdminSchema = Joi.object({
   password: Joi.string().min(7).required(),
 });
 
+const updateAdminSchema = Joi.object({
+  firstName: Joi.string().min(3).max(100),
+  lastName: Joi.string().min(3).max(100),
+  phoneNumber: myCustomJoi.string().phoneNumber(),
+  country: Joi.string(),
+});
+
+
 module.exports = {
   signupAdminSchema,
-  loginAdminSchema
+  loginAdminSchema,
+  updateAdminSchema
 }

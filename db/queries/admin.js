@@ -23,4 +23,21 @@ module.exports = {
             RETURNING id, email, first_name, last_name, phone_number, country, created_at;`,
 
   fetchAdminByEmail: "SELECT * FROM admin_info WHERE email = $1",
+
+  updateAdminPassword: `UPDATE admin_info
+  SET 
+    password = $1,
+    updated_at = NOW()
+  WHERE email = $2
+  RETURNING *;`,
+
+  updateAdminPassword: `UPDATE admin_info
+  SET 
+  first_name = $1,
+  last_name = $2,
+  phone_number = $3,
+  country = $4,
+  updated_at = NOW()
+  WHERE email = $5
+  RETURNING *;`,
 };

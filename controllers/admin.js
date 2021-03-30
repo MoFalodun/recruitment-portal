@@ -1,6 +1,6 @@
 const { addAdmin,
-    getAdminByEmail, } = require("../services");
-const { hashPassword, comparePassword, addDataToToken } = require("../utils");
+    getAdminByEmail, updateAdminDetails } = require("../services");
+const { hashPassword, comparePassword, addDataToToken, verifyToken } = require("../utils");
 const addNewAdmin = async (req, res) => {
   try {
     const hashedPassword = hashPassword(req.body.password);
@@ -46,7 +46,29 @@ const loginAdmin = async (req, res) => {
   }
 };
 
+const updateExistingAdmin = async (req, res) => {
+  try {
+    const { authorization } = req.headers;
+    const token = authorization.split(' ')[1];
+    const { err, data } = verifyToken(token);
+    console.log(req.headers)
+    if (err) {
+      console.log(err);
+      return res.status(401).json({ status: "fail", message: "Invalid token" });
+    }
+    const admin = data;
+    const updatedAdmin = await updateAdminDetails (req.body, admin.email);
+    res
+      .status(201)
+      .json({ status: 'success', message: 'Admin updated successfully.', data: updatedAdmin });
+} catch (error) {
+    console.log(error)
+  res.status(500).json({ status: 'fail', message: 'Something went wrong.' });
+}
+};
+
 module.exports = {
     loginAdmin,
     addNewAdmin,
+    updateExistingAdmin,
 }

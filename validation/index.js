@@ -4,7 +4,7 @@ const {
   loginSchema,
   applicationSchema,
 } = require("./user");
-const { signupAdminSchema, loginAdminSchema } = require("./admin");
+const { signupAdminSchema, loginAdminSchema, updateAdminSchema } = require("./admin");
 
 module.exports = {
   signupSchema,
@@ -13,4 +13,5 @@ module.exports = {
   questionSchema,
   signupAdminSchema,
   loginAdminSchema,
+  updateAdminSchema,
 };

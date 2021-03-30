@@ -1,6 +1,6 @@
 const db = require("../db/setup");
 const { generateUUID } = require("../utils");
-const cloudinary = require('cloudinary').v2;
+const cloudinary = require('cloudinary');
 const {
   insertUser,
   fetchUserByEmail,
@@ -58,12 +58,15 @@ const addUserApplication = async (data) => {
   ]);
 };
 
-const cloudinaryConfig = async (cvPath, photoPath) => {
+const cloudinaryConfig = async (cvPath) => {
   try {
-    const cvData = await cloudinary.v2.uploader.upload(cvPath);
-    const photoData = await cloudinary.v2.uploader.upload(photoPath);
-    const data = [cvData, photoData];
+    console.log(cvPath)
+    const data = await cloudinary.v2.uploader.upload(cvPath);
     return data;
+   
+    // const photoData = await cloudinary.v2.uploader.upload(photoPath);
+    // const data = [cvData];
+    // return data;
   } catch (error) {
     return (error);
   }

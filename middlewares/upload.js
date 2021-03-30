@@ -31,16 +31,20 @@ cloudinary.config({
 const cloudinaryUpload = async (req, res, next) => {
     try {
         console.log(req.files)
-      const data = await cloudinaryConfig(req.files.cv.tempFilePath, req.files.picture.tempFilePath);
-      req.body.cv = req.files.cv.secure_url;
-      req.body.picture= req.files.picture.secure_url;
-      next();
+        const [cvData, photoData] = await Promise.all([
+            cloudinaryConfig(req.files.cv.tempFilePath),
+            cloudinaryConfig(req.files.photo.tempFilePath),
+          ]);
+          req.body.cv = cvData.secure_url;
+          req.body.picture = photoData.secure_url;
+          console.log(cvData.secure_url)
+          console.log(photoData.secure_url)
+          next();
     } catch (error) {
       console.log(error);
     }
   };
-  
-
+ 
 module.exports = {
     cloudinaryUpload,
 }
