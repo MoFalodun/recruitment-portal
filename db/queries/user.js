@@ -6,7 +6,15 @@ module.exports = {
           last_name varchar not null,
           phone_number varchar not null,
           password varchar not null,
+          date_of_birth varchar ,
+          address varchar ,
+          university varchar ,
+          course_of_study varchar ,
+          cgpa INT ,
+          cv varchar,
+          picture varchar,
           is_admin boolean default 'false',
+          applied_at TIMESTAMPTZ default now(),
           created_at TIMESTAMPTZ default now(),
           updated_at TIMESTAMPTZ default now()
       );`,
@@ -78,4 +86,37 @@ module.exports = {
     updated_at = NOW()
   WHERE email = $2
   RETURNING *;`,
+
+  fetchAppliedUserDetails: `SELECT user_info.email,
+  user_info.email,
+  user_info.first_name,
+  user_info.last_name,
+  user_info.phone_number,
+  user_application.date_of_birth,
+  user_application.address,
+  user_application.university,
+  user_application.course_of_study,
+  user_application.cgpa,
+  user_application.cv,
+  user_application.picture,
+  user_application.created_at
+  FROM user_info
+  LEFT JOIN user_application
+  ON user_info.id = user_application.user_id
+  WHERE user_info.email= $1;`,
+
+updateUserInfo: `UPDATE user_info
+SET 
+date_of_birth = U2.date_of_birth,
+address = U2.address,
+university = U2.university,
+course_of_study = U2.course_of_study,
+cgpa = U2.cgpa,
+cv = U2.cv,
+picture = U2.picture,
+applied_at = U2.created_at
+FROM user_info as u1
+INNER JOIN user_application  as U2 ON U2.user_id = u1.id;
+`
+
 };
