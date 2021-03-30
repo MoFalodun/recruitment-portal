@@ -4,8 +4,8 @@ const { insertQuestions, fetchQuestionsByTitle, fetchAllQuestions } = require('.
 
 const addQuestion= async (data) => {
     const id = generateUUID;
-    const { title, optionA, optionB, optionC, correctAnswer } = data;
-    return db.one(insertQuestions, [id, title, optionA, optionB, optionC, correctAnswer ])
+    const { title, optionA, optionB, optionC, optionD, correctAnswer } = data;
+    return db.one(insertQuestions, [id, title, optionA, optionB, optionC, optionD, correctAnswer ])
 }
 
 const getQuestionByTitle = async (title) => db.oneOrNone(fetchQuestionsByTitle, [title])

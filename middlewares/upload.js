@@ -12,9 +12,10 @@ cloudinary.config({
 
 const cloudinaryConfig = async(req, res, next) => {
        try {
-        const file = req.files.photo;
+        const photo = req.files.photo;
+        const file = req.files.file
         console.log(file)
-        cloudinary.uploader.upload(file.tempFilePath, (err, result) => {
+        cloudinary.uploader.upload(photo.tempFilePath, file.tempFilePath, (err, result) => {
             res.status(200).json({
                 status: "success",
                 result

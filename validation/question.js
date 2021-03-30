@@ -5,6 +5,7 @@ const questionSchema = Joi.object({
   optionA: Joi.string().min(1).max(70).required(),
   optionB: Joi.string().min(1).max(70).required(),
   optionC: Joi.string().min(1).max(70).required(),
+  optionD: Joi.string().min(1).max(70).required(),
   correctAnswer: Joi.string().min(1).max(70).required(),
 });
 

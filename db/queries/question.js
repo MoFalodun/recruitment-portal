@@ -6,6 +6,7 @@ module.exports = {
     option_a varchar not null,
     option_b varchar not null,
     option_c varchar not null,
+    option_d varchar not null,
     correct_answer varchar not null,
     created_at TIMESTAMPTZ default now(),
     updated_at TIMESTAMPTZ default now()
@@ -14,25 +15,16 @@ module.exports = {
 
   insertQuestions: `
     INSERT INTO questions
-      ( id, title, option_a, option_b, option_c, correct_answer) 
-    VALUES ($1, $2, $3, $4, $5, $6)
+      ( id, title, option_a, option_b, option_c, option_d, correct_answer) 
+    VALUES ($1, $2, $3, $4, $5, $6, $7)
     RETURNING *;
   `,
 
-  fetchAllQuestions: 'SELECT id, title, option_a, option_b, option_c FROM questions',
-  fetchQuestionsByTitle: 'SELECT id, title, option_a, option_b, option_c FROM questions WHERE title = $1',
-
-  updateQuestionsById: `
-    UPDATE todo
-    SET 
-      title = $1,
-      updated_at=NOW()
-    WHERE id = $2
-    RETURNING *;
-  `,
+  fetchAllQuestions: 'SELECT id, title, option_a, option_b, option_c, option_d FROM questions',
+  fetchQuestionsByTitle: 'SELECT id, title, option_a, option_b, option_c, option_d FROM questions WHERE title = $1',
 
   deleteQuestionsById: 'DELETE FROM questions WHERE id = $1',
 
-  fetchQuestions: 'SELECT id, title, option_a, option_b, option_c FROM questions',
+  fetchQuestions: 'SELECT id, title, option_a, option_b, option_c, option_d FROM questions',
 
 };
