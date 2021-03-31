@@ -6,6 +6,7 @@ module.exports = {
             phone_number varchar not null,
             country varchar not null,
             picture varchar,
+            address varchar not null,
             password varchar not null,
             is_admin boolean default 'true',
             created_at TIMESTAMPTZ default now(),
@@ -18,9 +19,10 @@ module.exports = {
             phone_number,
             country,
             picture,
+            address,
             password
-            ) values ($1, $2, $3, $4, $5, $6, $7)
-            RETURNING id, email, name, phone_number, country, picture, created_at;`,
+            ) values ($1, $2, $3, $4, $5, $6, $7, $8)
+            RETURNING id, email, name, phone_number, country, picture, address created_at;`,
 
   fetchAdminByEmail: "SELECT * FROM admin_info WHERE email = $1",
 
@@ -31,12 +33,12 @@ module.exports = {
   WHERE email = $2
   RETURNING *;`,
 
-  updateAdminPassword: `UPDATE admin_info
+  updateAdmin: `UPDATE admin_info
   SET 
-  first_name = $1,
-  last_name = $2,
-  phone_number = $3,
-  country = $4,
+  name = $1,
+  phone_number = $2,
+  country = $3,
+  address = $4,
   updated_at = NOW()
   WHERE email = $5
   RETURNING *;`,

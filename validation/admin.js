@@ -5,6 +5,7 @@ const signupAdminSchema = Joi.object({
   email: Joi.string().email().required(),
   name: Joi.string().min(3).max(100).required(),
   phoneNumber: myCustomJoi.string().phoneNumber().required(),
+  address: Joi.string().min(3).max(100).required(),
   country: Joi.string().required(),
   password: Joi.string().min(7).required(),
   confirmPassword: Joi.string().valid(Joi.ref('password')).required(),
@@ -19,6 +20,7 @@ const loginAdminSchema = Joi.object({
 const updateAdminSchema = Joi.object({
   name: Joi.string().min(3).max(100),
   phoneNumber: myCustomJoi.string().phoneNumber(),
+  address: Joi.string().min(3).max(100),
   country: Joi.string(),
   picture: Joi.string(),
 });

@@ -1,10 +1,10 @@
 const db = require("../db/setup");
 const { generateUUID } = require("../utils");
-const { insertAdmin, fetchAdminByEmail, updateAdminPassword, updateUserStatusbyID } = require("../db/queries/admin");
+const { insertAdmin, fetchAdminByEmail, updateAdmin, updateUserStatusbyID } = require("../db/queries/admin");
 
 const addAdmin = async (data) => {
     const id = generateUUID;
-    const { email, name, phoneNumber, country, picture, password } = data;
+    const { email, name, phoneNumber, country, picture, address, password } = data;
     return db.one(insertAdmin, [
       id,
       email,
@@ -12,6 +12,7 @@ const addAdmin = async (data) => {
       phoneNumber,
       country,
       picture,
+      address,
       password,
     ]);
 };
@@ -24,8 +25,8 @@ const updateUserbyAdmin = async(data, userID) => {
 }
 
 const updateAdminDetails = async (data, email) => {
-  const { firstName, lastName, phoneNumber, country, } = data;
-  return db.one(updateAdminPassword, [firstName, lastName, phoneNumber, country, email])
+  const { name, phoneNumber, country, address } = data;
+  return db.one(updateAdmin, [name, phoneNumber, country, address, email])
 }
 
 module.exports = {
