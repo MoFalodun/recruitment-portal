@@ -14,6 +14,7 @@ module.exports = {
           cv varchar,
           picture varchar,
           is_admin boolean default 'false',
+          application_status varchar default 'Not applied',
           applied_at TIMESTAMPTZ default now(),
           created_at TIMESTAMPTZ default now(),
           updated_at TIMESTAMPTZ default now()
@@ -32,7 +33,7 @@ module.exports = {
         cv varchar,
         picture varchar,
         user_id uuid REFERENCES user_info NOT NULL,
-        is_admin boolean default 'false',
+        application_status varchar default 'Pending',
         created_at TIMESTAMPTZ default now(),
         updated_at TIMESTAMPTZ default now()
     );`,
@@ -114,7 +115,8 @@ course_of_study = ( SELECT user_application.course_of_study FROM user_applicatio
 cgpa = ( SELECT user_application.cgpa FROM user_application WHERE user_application.user_id =user_info.id),
 cv = ( SELECT user_application.cv FROM user_application WHERE user_application.user_id =user_info.id),
 picture = ( SELECT user_application.picture FROM user_application WHERE user_application.user_id =user_info.id),
-applied_at = ( SELECT user_application.created_at FROM user_application WHERE user_application.user_id =user_info.id)
+applied_at = ( SELECT user_application.created_at FROM user_application WHERE user_application.user_id =user_info.id),
+application_status = ( SELECT user_application.application_status FROM user_application WHERE user_application.user_id =user_info.id)
 ;
 `
 };
