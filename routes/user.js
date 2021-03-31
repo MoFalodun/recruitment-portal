@@ -17,7 +17,7 @@ userRouter.post('/apply', authenticate, cloudinaryUpload, validateApplication, c
 // to merge user_info with user_application
 userRouter.put('/merge', updateUser )
 // for questions
-userRouter.get('/user/question', authenticate, getAllQuestion );
+userRouter.get('/user/question', getAllQuestion );
 userRouter.post('/user/reset', resetPassword );
 userRouter.put('/resetPassword/:token', updatePassword)
 userRouter.post('/logout', logoutUser)
