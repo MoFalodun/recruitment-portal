@@ -1,5 +1,5 @@
 const { addAdmin,
-    getAdminByEmail, updateAdminDetails } = require("../services");
+    getAdminByEmail, updateAdminDetails, updateUserbyAdmin, getUserByEmail } = require("../services");
 const { hashPassword, comparePassword, addDataToToken, verifyToken } = require("../utils");
 const addNewAdmin = async (req, res) => {
   try {
@@ -67,8 +67,23 @@ const updateExistingAdmin = async (req, res) => {
 }
 };
 
+const updateUserStatus = async (req, res) => {
+  try {
+    const { email } = req.params;
+    // const userToBeUpdated = await getUserByEmail(email)
+    const userToBeUpdated = await updateUserbyAdmin (req.body, email );
+    res
+      .status(201)
+      .json({ status: 'success', message: 'User updated successfully.', data: userToBeUpdated });
+} catch (error) {
+    console.log(error)
+  res.status(500).json({ status: 'fail', message: 'Something went wrong.' });
+}
+};
+
 module.exports = {
     loginAdmin,
     addNewAdmin,
     updateExistingAdmin,
+    updateUserStatus,
 }

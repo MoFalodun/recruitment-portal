@@ -10,7 +10,7 @@ const {
   getUser
 } = require("./user");
 const { addNewQuestion, getAllQuestion } = require("./question");
-const { loginAdmin, addNewAdmin, updateExistingAdmin, } = require("./admin");
+const { loginAdmin, addNewAdmin, updateExistingAdmin, updateUserStatus } = require("./admin");
 
 module.exports = {
   addNewUser,
@@ -27,4 +27,5 @@ module.exports = {
   updateExistingAdmin,
   updateUser,
   getUser,
+  updateUserStatus,
 };

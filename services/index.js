@@ -12,7 +12,7 @@ const {
 } = require("./user");
 
 const { addAdmin,
-  getAdminByEmail, updateAdminDetails } = require("./admin")
+  getAdminByEmail, updateAdminDetails, updateUserbyAdmin } = require("./admin")
 
 const { addQuestion, getQuestionByTitle, getQuestions } = require("./question");
 
@@ -33,4 +33,5 @@ module.exports = {
   cloudinaryConfig,
   updateAdminDetails,
   updateUserByApplication,
+  updateUserbyAdmin,
 };

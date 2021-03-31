@@ -40,4 +40,11 @@ module.exports = {
   updated_at = NOW()
   WHERE email = $5
   RETURNING *;`,
+
+  updateUserStatusbyEmail: `UPDATE user_info
+  SET
+  application_status = $1,
+    updated_at = NOW()
+  WHERE email = $2
+  RETURNING *;`
 };

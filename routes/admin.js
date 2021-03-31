@@ -9,7 +9,7 @@ const {
   checkIfQuestionExists,
   validateAdminUpdate,
 } = require("../middlewares");
-const { loginAdmin, addNewAdmin, addNewQuestion, updateExistingAdmin } = require("../controllers");
+const { loginAdmin, addNewAdmin, addNewQuestion, updateExistingAdmin, updateUserStatus } = require("../controllers");
 
 const adminRouter = Router();
 
@@ -33,5 +33,6 @@ adminRouter.post(
 );
 
 adminRouter.put('/update', adminAccessValidator, validateAdminUpdate, updateExistingAdmin )
+adminRouter.put('/updateUser/:email', adminAccessValidator, updateUserStatus)
 
 module.exports = { adminRouter };
