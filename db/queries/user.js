@@ -107,16 +107,24 @@ module.exports = {
 
 updateUserInfo: `UPDATE user_info
 SET 
-date_of_birth = U2.date_of_birth,
-address = U2.address,
-university = U2.university,
-course_of_study = U2.course_of_study,
-cgpa = U2.cgpa,
-cv = U2.cv,
-picture = U2.picture,
-applied_at = U2.created_at
-FROM user_info as u1
-INNER JOIN user_application  as U2 ON U2.user_id = u1.id;
+date_of_birth =( SELECT user_application.date_of_birth FROM user_application WHERE user_application.user_id =user_info.id),
+address = ( SELECT user_application.address FROM user_application WHERE user_application.user_id =user_info.id),
+university = ( SELECT user_application.university FROM user_application WHERE user_application.user_id =user_info.id),
+course_of_study = ( SELECT user_application.course_of_study FROM user_application WHERE user_application.user_id =user_info.id),
+cgpa = ( SELECT user_application.cgpa FROM user_application WHERE user_application.user_id =user_info.id),
+cv = ( SELECT user_application.cv FROM user_application WHERE user_application.user_id =user_info.id),
+picture = ( SELECT user_application.picture FROM user_application WHERE user_application.user_id =user_info.id),
+applied_at = ( SELECT user_application.created_at FROM user_application WHERE user_application.user_id =user_info.id)
+;
 `
-
 };
+// date_of_birth = U2.date_of_birth,
+// address = U2.address,
+// university = U2.university,
+// course_of_study = U2.course_of_study,
+// cgpa = U2.cgpa,
+// cv = U2.cv,
+// picture = U2.picture,
+// applied_at = U2.created_at
+// FROM user_info as U1
+// LEFT JOIN user_application  as U2 ON U1.id = U2.user_id

@@ -7,7 +7,8 @@ const {
   addUserApplication,
   getApplicationByUser,
   getAllUsers,
-  cloudinaryConfig
+  cloudinaryConfig,
+  updateUserByApplication,
 } = require("./user");
 
 const { addAdmin,
@@ -31,4 +32,5 @@ module.exports = {
   getQuestions,
   cloudinaryConfig,
   updateAdminDetails,
+  updateUserByApplication,
 };

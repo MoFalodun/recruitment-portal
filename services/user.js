@@ -11,6 +11,7 @@ const {
   fetchAllUsers,
   fetchUserApplicationByEmail,
   updateUserPasswordById,
+  updateUserInfo,
 } = require("../db/queries/user");
 const { insertApplicationTable } = require("../db/queries/computation")
 
@@ -58,6 +59,10 @@ const addUserApplication = async (data) => {
   ]);
 };
 
+const updateUserByApplication = async ()=> {
+  db.manyOrNone(updateUserInfo);
+};
+
 const cloudinaryConfig = async (cvPath) => {
   try {
     console.log(cvPath)
@@ -99,4 +104,5 @@ module.exports = {
   getAllUsers,
   getUserApplicationByEmail,
   cloudinaryConfig,
+  updateUserByApplication,
 };

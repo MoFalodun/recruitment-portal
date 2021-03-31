@@ -6,6 +6,8 @@ const {
   getUserApplicationByEmail,
   updateUserPassword,
   getUserById,
+  updateUserByApplication,
+  
 } = require("../services");
 const session = require('express-session');
 const {
@@ -31,7 +33,7 @@ const addNewUser = async (req, res) => {
   }
 };
 
-const addNewApplication = async (req, res) => {
+const addNewApplication = async (req, res, next) => {
   try {
     const userID = req.user.id;
     console.log(req.body)
@@ -39,6 +41,7 @@ const addNewApplication = async (req, res) => {
       ...req.body,
       userId: userID,
     });
+    
     res.status(201).json({
       status: "success",
       message: "Application successful",
@@ -49,6 +52,56 @@ const addNewApplication = async (req, res) => {
     res.status(500).json({ status: "fail", message: "Something went wrong." });
   }
 };
+
+const updateUser = async(req, res) => {
+  try {
+    // const { authorization } = req.headers;
+    // const token = authorization.split(' ')[1];
+    // const { err, data } = verifyToken(token);
+    // console.log(req.headers)
+    // if (err) {
+    //   console.log(err);
+    //   return res.status(401).json({ status: "fail", message: "Invalid token" });
+    // }
+    // const user = data;
+    updatedApp = await updateUserByApplication()
+    // console.log(user)
+    res.status(201).json({
+      status: "success",
+      message: "Update successful",
+      data: updatedApp,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ status: "fail", message: "Something went wrong." });
+  }
+}
+
+const getUser = async(req, res) => {
+  try {
+    const { authorization } = req.headers;
+    const token = authorization.split(' ')[1];
+    const { err, data } = verifyToken(token);
+    console.log(req.headers)
+    if (err) {
+      console.log(err);
+      return res.status(401).json({ status: "fail", message: "Invalid token" });
+    }
+    const user = data;
+    userData = await getUserByEmail(user.email)
+    delete userData.password
+    // console.log(user)
+    res.status(201).json({
+      status: "success",
+      message: "User fetched Successfully",
+      data: userData,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ status: "fail", message: "Something went wrong." });
+  }
+}
+
 // const addAdminUser = async (req, res) => {
 //   try {
 //     const hashedPassword = hashPassword(req.body.password);
@@ -224,4 +277,6 @@ module.exports = {
   resetPassword,
   updatePassword,
   logoutUser,
+  updateUser,
+  getUser,
 };
