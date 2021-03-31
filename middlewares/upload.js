@@ -1,4 +1,4 @@
-const cloudinary = require('cloudinary').v2;
+const cloudinary = require('cloudinary');
 const Datauri = require('datauri');
 const { config } = require('dotenv');
 const { cloudinaryConfig } = require('../services')
