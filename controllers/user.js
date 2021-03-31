@@ -177,13 +177,15 @@ const allUsers = async (req, res) => {
   }
 };
 
+
+//changed
 const singleUser = async (req, res) => {
   try {
-    const { email } = req.user;
-    const singleUser = await getUserApplicationByEmail(email);
+    const { user_id } = req.user;
+    const singleUser = await getUserApplicationByEmail(user_id);
     res.status(200).json({
       status: "success",
-      message: "Users fetched successfully.",
+      message: "User fetched successfully.",
       data: singleUser,
     });
   } catch (error) {

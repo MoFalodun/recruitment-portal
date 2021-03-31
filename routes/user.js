@@ -13,7 +13,7 @@ userRouter.post('/signup', validateSignup, checkIfUserExists, addNewUser );
 userRouter.post('/login', validateLogin, loginUser);
 userRouter.post('/upload', cloudinaryUpload );
 //for application
-userRouter.post('/apply', authenticate, cloudinaryUpload, validateApplication, checkForUserProfile, authenticateEmail, addNewApplication );
+userRouter.post('/apply', authenticate, cloudinaryUpload, validateApplication, checkForUserProfile, addNewApplication );
 // to merge user_info with user_application
 userRouter.put('/merge', updateUser )
 // for questions

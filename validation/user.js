@@ -16,9 +16,6 @@ const loginSchema = Joi.object({
 });
 
 const applicationSchema = Joi.object({
-  firstName: Joi.string().min(3).max(100).required(),
-  lastName: Joi.string().min(3).max(100).required(),
-  email: Joi.string().email().required(),
   dob: Joi.date().less('now').required(),
   address: Joi.string().min(3).max(100).required(),
   university: Joi.string().required(),
