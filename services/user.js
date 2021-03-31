@@ -73,8 +73,6 @@ const cloudinaryConfig = async (cvPath) => {
 
 const getUserByEmail = async (email) => db.oneOrNone(fetchUserByEmail, [email]);
 
-
-
 const getApplicationByUser = async (userId) =>
   db.oneOrNone(fetchUserProfile, [userId]);
 

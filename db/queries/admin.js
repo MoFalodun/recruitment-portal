@@ -41,10 +41,10 @@ module.exports = {
   WHERE email = $5
   RETURNING *;`,
 
-  updateUserStatusbyEmail: `UPDATE user_info
+  updateUserStatusbyID: `UPDATE user_application
   SET
   application_status = $1,
     updated_at = NOW()
-  WHERE id = $2
+  WHERE user_id = $2
   RETURNING *;`
 };

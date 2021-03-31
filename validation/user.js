@@ -25,6 +25,10 @@ const applicationSchema = Joi.object({
   picture: Joi.string(),
 });
 
+const updatePasswordSchema = Joi.object({
+  password: Joi.string().min(7).required()
+});
+
 module.exports = {
   signupSchema,
   loginSchema,

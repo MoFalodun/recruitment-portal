@@ -1,5 +1,5 @@
 const { authenticate, adminAccessValidator, isAuth } = require("./auth");
-const { validateSignup, validateLogin, checkIfUserExists, validateApplication, authenticateEmail, checkForUserProfile } = require("./user");
+const { validateSignup, validateLogin, checkIfUserExists, validateApplication, authenticateEmail, checkForUserProfile, validatePasswordUpdate } = require("./user");
 const { validateQuestions, checkIfQuestionExists } = require("./question");
 const { checkIfAdminExists,
   validateAdminLogin,
@@ -24,4 +24,5 @@ module.exports = {
   cloudinaryUpload,
   validateAdminUpdate,
   checkIfApplicantExists,
+  validatePasswordUpdate,
 };

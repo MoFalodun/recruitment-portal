@@ -1,4 +1,4 @@
-const { signupSchema, loginSchema, signupAdminSchema, applicationSchema } = require('../validation');
+const { signupSchema, loginSchema, updatePasswordSchema, applicationSchema } = require('../validation');
 const { getUserByEmail, getApplicationByUser } = require('../services');
 const validateSignup = (req, res, next) => {
     try {
@@ -26,19 +26,6 @@ const validateApplication = (req, res, next) => {
   }
 };
 
-// const validateAdminSignup = (req, res, next) => {
-//   try {
-//     const { error } = signupAdminSchema.validate(req.body);
-//     if (!error) {
-//         return next();
-//     }
-//     return res.status(400).json({ status: 'fail', message: error.message });
-//   } catch (error) {
-//     console.log(error)
-//     return res.status(500).json({ status: 'fail', message: 'Something went wrong.' });
-//   }
-// };
-
 const validateLogin = (req, res, next) => {
     try {
       const { error } = loginSchema.validate(req.body);
@@ -51,6 +38,20 @@ const validateLogin = (req, res, next) => {
       console.log(ok)
       return res.status(500).json({ status: 'fail', message: 'Something went wrong.' });
     }
+};
+
+const validatePasswordUpdate = (req, res, next) => {
+  try {
+    const { error } = updatePasswordSchema.validate(req.body);
+    if (!error) {
+        return next();
+    }
+    return res.status(400).json({ status: 'fail', message: error.message });
+  } catch (error) {
+    console.log(error)
+    console.log(ok)
+    return res.status(500).json({ status: 'fail', message: 'Something went wrong.' });
+  }
 };
 const checkIfUserExists = async (req, res, next) => {
     try {
@@ -98,5 +99,6 @@ const checkForUserProfile = async (req, res, next) => {
     checkIfUserExists,
     validateApplication,
     authenticateEmail,
-    checkForUserProfile, 
+    checkForUserProfile,
+    validatePasswordUpdate,
   };

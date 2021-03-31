@@ -69,9 +69,9 @@ const updateExistingAdmin = async (req, res) => {
 
 const updateUserStatus = async (req, res) => {
   try {
-    const { email } = req.params;
+    const { id } = req.params;
     // const userToBeUpdated = await getUserByEmail(email)
-    const userToBeUpdated = await updateUserbyAdmin (req.body, email );
+    const userToBeUpdated = await updateUserbyAdmin (req.body, id );
     res
       .status(201)
       .json({ status: 'success', message: 'User updated successfully.', data: userToBeUpdated });

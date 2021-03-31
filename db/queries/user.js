@@ -60,10 +60,12 @@ module.exports = {
           RETURNING id, email, first_name, last_name, phone_number, created_at;`,
 
   fetchUserByEmail: "SELECT * FROM user_info WHERE email = $1",
-  fetchUserApplicationByEmail: "SELECT * FROM user_application WHERE user_id = $1",
+  fetchUserApplicationByEmail: "SELECT * FROM user_application WHERE email = $1",
   fetchUserById: "SELECT * FROM user_info WHERE id = $1",
   fetchAllUsers: "SELECT * FROM user_info",
   fetchUserProfile: "SELECT * FROM user_application WHERE user_id = $1",
+
+  // fetchUserApplicationById: "SELECT * FROM user_application WHERE user_id = $1",
 
   updateUserPasswordById: `UPDATE user_info
   SET 

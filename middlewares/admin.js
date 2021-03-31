@@ -1,5 +1,5 @@
 const { signupAdminSchema, loginAdminSchema, updateAdminSchema } = require('../validation');
-const { getAdminByEmail, getUserByEmail } = require('../services');
+const { getAdminByEmail, getApplicationByUser } = require('../services');
 const validateAdminSignup = (req, res, next) => {
     try {
       const { error } = signupAdminSchema.validate(req.body);
@@ -54,9 +54,9 @@ const checkIfAdminExists = async (req, res, next) => {
 
   const checkIfApplicantExists = async (req, res, next) => {
     try {
-      const { email } = req.params;
-        const applicantMail = await getUserByEmail(email);
-      if (applicantMail) {
+      const { id } = req.params;
+        const applicantID = await getApplicationByUser(id);
+      if (applicantID) {
         return next();
       }
       return res.status(404).json({ status: 'fail', message: 'Applicant does not exist' });
