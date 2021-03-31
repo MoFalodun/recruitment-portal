@@ -1,5 +1,5 @@
 const { signupAdminSchema, loginAdminSchema, updateAdminSchema } = require('../validation');
-const { getAdminByEmail } = require('../services');
+const { getAdminByEmail, getUserByEmail } = require('../services');
 const validateAdminSignup = (req, res, next) => {
     try {
       const { error } = signupAdminSchema.validate(req.body);
@@ -52,9 +52,24 @@ const checkIfAdminExists = async (req, res, next) => {
     }
   };
 
+  const checkIfApplicantExists = async (req, res, next) => {
+    try {
+      const { email } = req.params;
+        const applicantMail = await getUserByEmail(email);
+      if (applicantMail) {
+        return next();
+      }
+      return res.status(404).json({ status: 'fail', message: 'Applicant does not exist' });
+    } catch (error) {
+      console.log(error)
+      return res.status(500).json({ status: 'fail', message: 'Something went wrong.' });
+    }
+  };
+
   module.exports = {
     checkIfAdminExists,
     validateAdminLogin,
     validateAdminSignup,
     validateAdminUpdate,
+    checkIfApplicantExists
   }

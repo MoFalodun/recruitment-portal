@@ -3,7 +3,7 @@ const { validateSignup, validateLogin, checkIfUserExists, validateApplication, a
 const { validateQuestions, checkIfQuestionExists } = require("./question");
 const { checkIfAdminExists,
   validateAdminLogin,
-  validateAdminSignup, validateAdminUpdate } = require("./admin");
+  validateAdminSignup, validateAdminUpdate, checkIfApplicantExists } = require("./admin");
 const { cloudinaryUpload } = require('./upload');
 
 module.exports = {
@@ -23,4 +23,5 @@ module.exports = {
   isAuth,
   cloudinaryUpload,
   validateAdminUpdate,
+  checkIfApplicantExists,
 };

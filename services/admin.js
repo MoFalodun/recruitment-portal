@@ -4,14 +4,14 @@ const { insertAdmin, fetchAdminByEmail, updateAdminPassword, updateUserStatusbyE
 
 const addAdmin = async (data) => {
     const id = generateUUID;
-    const { email, firstName, lastName, phoneNumber, country, password } = data;
+    const { email, name, phoneNumber, country, picture, password } = data;
     return db.one(insertAdmin, [
       id,
       email,
-      firstName,
-      lastName,
+      name,
       phoneNumber,
       country,
+      picture,
       password,
     ]);
 };
