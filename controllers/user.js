@@ -47,6 +47,7 @@ const addNewApplication = async (req, res, next) => {
       message: "Application successful",
       data: newApplication,
     });
+    next();
   } catch (error) {
     console.log(error);
     res.status(500).json({ status: "fail", message: "Something went wrong." });
@@ -66,14 +67,14 @@ const updateUser = async(req, res) => {
     // const user = data;
     updatedApp = await updateUserByApplication()
     // console.log(user)
-    res.status(201).json({
-      status: "success",
-      message: "Update successful",
-      data: updatedApp,
-    });
+    // res.status(201).json({
+    //   status: "success",
+    //   message: "Update successful",
+    //   data: updatedApp,
+    // });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ status: "fail", message: "Something went wrong." });
+    // res.status(500).json({ status: "fail", message: "Something went wrong." });
   }
 }
 

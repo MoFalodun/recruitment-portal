@@ -10,11 +10,12 @@ module.exports = {
           address varchar ,
           university varchar ,
           course_of_study varchar ,
-          cgpa INT ,
+          cgpa REAL ,
           cv varchar,
           picture varchar,
           is_admin boolean default 'false',
-          application_status varchar default 'Not applied',
+          application_status varchar,
+          score REAL,
           applied_at TIMESTAMPTZ default now(),
           created_at TIMESTAMPTZ default now(),
           updated_at TIMESTAMPTZ default now()
@@ -26,12 +27,12 @@ module.exports = {
         address varchar not null,
         university varchar not null,
         course_of_study varchar not null,
-        cgpa INT not null,
+        cgpa REAL not null,
         cv varchar,
         picture varchar,
         user_id uuid REFERENCES user_info NOT NULL,
         application_status varchar default 'Pending',
-        score INT ,
+        score REAL ,
         created_at TIMESTAMPTZ default now(),
         updated_at TIMESTAMPTZ default now()
     );`,
@@ -84,7 +85,8 @@ cgpa = ( SELECT user_application.cgpa FROM user_application WHERE user_applicati
 cv = ( SELECT user_application.cv FROM user_application WHERE user_application.user_id =user_info.id),
 picture = ( SELECT user_application.picture FROM user_application WHERE user_application.user_id =user_info.id),
 applied_at = ( SELECT user_application.created_at FROM user_application WHERE user_application.user_id =user_info.id),
-application_status = ( SELECT user_application.application_status FROM user_application WHERE user_application.user_id =user_info.id)
+application_status = ( SELECT user_application.application_status FROM user_application WHERE user_application.user_id =user_info.id),
+score = ( SELECT user_application.score FROM user_application WHERE user_application.user_id =user_info.id)
 ;
 `
 };
