@@ -1,9 +1,7 @@
 module.exports = {
-    createApplicationTable: `CREATE TABLE IF NOT EXISTS application_analysis (
+    createApplicationTable: `CREATE TABLE IF NOT EXISTS timer (
             id SERIAL PRIMARY KEY,
-            current_application INT NOT NULL,
-            previous_application INT,
-            total_application INT
+            time TIME NOT NULL,
         );`,
     insertApplicationTable: `INSERT INTO application_analysis (current_application)
     SELECT COUNT(id) 

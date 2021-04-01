@@ -59,13 +59,8 @@ const updateUserByApplication = async ()=> {
 
 const cloudinaryConfig = async (cvPath) => {
   try {
-    console.log(cvPath)
     const data = await cloudinary.v2.uploader.upload(cvPath);
     return data;
-   
-    // const photoData = await cloudinary.v2.uploader.upload(photoPath);
-    // const data = [cvData];
-    // return data;
   } catch (error) {
     return (error);
   }
