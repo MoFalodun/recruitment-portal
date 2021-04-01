@@ -10,7 +10,7 @@ const {
   validateAdminUpdate,
   checkIfApplicantExists,
 } = require("../middlewares");
-const { loginAdmin, addNewAdmin, addNewQuestion, updateExistingAdmin, updateUserStatus } = require("../controllers");
+const { loginAdmin, addNewAdmin, addNewQuestion, updateExistingAdmin, updateUserStatus, getAllApplicants } = require("../controllers");
 
 const adminRouter = Router();
 
@@ -35,5 +35,6 @@ adminRouter.post(
 
 adminRouter.put('/update', adminAccessValidator, validateAdminUpdate, updateExistingAdmin )
 adminRouter.put('/updateUser/:id', adminAccessValidator, checkIfApplicantExists, updateUserStatus)
+adminRouter.get('/applicants', adminAccessValidator, getAllApplicants)
 
 module.exports = { adminRouter };

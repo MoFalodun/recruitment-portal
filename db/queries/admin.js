@@ -49,4 +49,5 @@ module.exports = {
     updated_at = NOW()
   WHERE user_id = $2
   RETURNING *;`
+  
 };

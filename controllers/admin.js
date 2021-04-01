@@ -1,5 +1,5 @@
 const { addAdmin,
-    getAdminByEmail, updateAdminDetails, updateUserbyAdmin, getUserByEmail } = require("../services");
+    getAdminByEmail, updateAdminDetails, updateUserbyAdmin, getUserByEmail, fetchAllApplicants } = require("../services");
 const { hashPassword, comparePassword, addDataToToken, verifyToken } = require("../utils");
 const addNewAdmin = async (req, res) => {
   try {
@@ -81,9 +81,21 @@ const updateUserStatus = async (req, res) => {
 }
 };
 
+const getAllApplicants = async (req, res) => {
+  try {
+    
+    const applicants = await fetchAllApplicants();
+    res.status(200).json({ status: 'success', message: 'applicants fetched successfully', data: applicants });
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({ status: 'fail', message: 'Something went wrong.' });
+  }
+};
+
 module.exports = {
     loginAdmin,
     addNewAdmin,
     updateExistingAdmin,
     updateUserStatus,
+    getAllApplicants
 }

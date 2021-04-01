@@ -1,6 +1,7 @@
 const db = require("../db/setup");
 const { generateUUID } = require("../utils");
 const { insertAdmin, fetchAdminByEmail, updateAdmin, updateUserStatusbyID } = require("../db/queries/admin");
+const { fetchAllUsers } = require("../db/queries/user")
 
 const addAdmin = async (data) => {
     const id = generateUUID;
@@ -24,6 +25,8 @@ const updateUserbyAdmin = async(data, userID) => {
   return db.oneOrNone(updateUserStatusbyID, [applicationStatus, userID])
 }
 
+const fetchAllApplicants = async () => db.manyOrNone(fetchAllUsers)
+
 const updateAdminDetails = async (data, email) => {
   const { name, phoneNumber, country, address } = data;
   return db.one(updateAdmin, [name, phoneNumber, country, address, email])
@@ -34,4 +37,5 @@ module.exports = {
     getAdminByEmail,
     updateAdminDetails,
     updateUserbyAdmin,
+    fetchAllApplicants,
 }

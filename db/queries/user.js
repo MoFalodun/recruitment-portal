@@ -62,7 +62,7 @@ module.exports = {
   fetchUserByEmail: "SELECT * FROM user_info WHERE email = $1",
   fetchUserApplicationByEmail: "SELECT * FROM user_application WHERE email = $1",
   fetchUserById: "SELECT * FROM user_info WHERE id = $1",
-  fetchAllUsers: "SELECT * FROM user_info",
+  fetchAllUsers: `SELECT CONCAT(first_name, ' ', last_name) as name , date_of_birth, address, university, cgpa FROM user_info WHERE application_status = 'Pending';`,
   fetchUserProfile: "SELECT * FROM user_application WHERE user_id = $1",
 
   // fetchUserApplicationById: "SELECT * FROM user_application WHERE user_id = $1",
@@ -88,13 +88,3 @@ application_status = ( SELECT user_application.application_status FROM user_appl
 ;
 `
 };
-// date_of_birth = U2.date_of_birth,
-// address = U2.address,
-// university = U2.university,
-// course_of_study = U2.course_of_study,
-// cgpa = U2.cgpa,
-// cv = U2.cv,
-// picture = U2.picture,
-// applied_at = U2.created_at
-// FROM user_info as U1
-// LEFT JOIN user_application  as U2 ON U1.id = U2.user_id
