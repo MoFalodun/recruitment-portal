@@ -42,6 +42,7 @@ const validateLogin = (req, res, next) => {
 
 const validatePasswordUpdate = (req, res, next) => {
   try {
+    console.log(req.body)
     const { error } = updatePasswordSchema.validate(req.body);
     if (!error) {
         return next();

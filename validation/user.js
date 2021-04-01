@@ -33,4 +33,5 @@ module.exports = {
   signupSchema,
   loginSchema,
   applicationSchema,
+  updatePasswordSchema,
 };

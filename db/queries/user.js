@@ -62,7 +62,7 @@ module.exports = {
   fetchUserByEmail: "SELECT * FROM user_info WHERE email = $1",
   fetchUserApplicationByEmail: "SELECT * FROM user_application WHERE email = $1",
   fetchUserById: "SELECT * FROM user_info WHERE id = $1",
-  fetchAllUsers: `SELECT CONCAT(first_name, ' ', last_name) as name , date_of_birth, address, university, cgpa FROM user_info WHERE application_status = 'Pending';`,
+  fetchAllUsers: `SELECT CONCAT(first_name, ' ', last_name) as name , id, email, date_of_birth, address, university, cgpa, score FROM user_info WHERE application_status = 'Pending';`,
   fetchUserProfile: "SELECT * FROM user_application WHERE user_id = $1",
 
   // fetchUserApplicationById: "SELECT * FROM user_application WHERE user_id = $1",
