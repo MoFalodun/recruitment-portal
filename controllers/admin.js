@@ -33,7 +33,7 @@ const loginAdmin = async (req, res) => {
         .status(200)
         .json({
           status: "success",
-          message: "User logged in successfully",
+          message: "Admin logged in successfully",
           data: { token, admin },
         });
     }
@@ -110,6 +110,17 @@ const addAssessmentTimer = async (req, res) => {
   }
 };
 
+const logoutAdmin = (req, res) => {
+  req.session.destroy((err) => {
+    if (err){throw err};
+    res.clearCookie("token");
+    return res.status(200).json({
+      status: "success",
+      message: "Admin logged out in successfully",
+    })
+  });
+};
+
 
 module.exports = {
     loginAdmin,
@@ -118,4 +129,5 @@ module.exports = {
     updateUserStatus,
     getAllApplicants,
     addAssessmentTimer,
+    logoutAdmin,
 }

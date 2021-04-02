@@ -27,6 +27,6 @@ userRouter.put('/resetPassword/:token', validatePasswordUpdate, updatePassword)
 userRouter.post('/logout', logoutUser)
 // to get a single logged in User
 userRouter.get('/singleUser', getUser)
-userRouter.get('/timer', authenticate, assessmentTime)
+userRouter.get('/timer', assessmentTime)
 
 module.exports = { userRouter }

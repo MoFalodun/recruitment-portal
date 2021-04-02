@@ -11,7 +11,7 @@ const {
   assessmentTime
 } = require("./user");
 const { addNewQuestion, getAllQuestion } = require("./question");
-const { loginAdmin, addNewAdmin, updateExistingAdmin, updateUserStatus, getAllApplicants, addAssessmentTimer } = require("./admin");
+const { loginAdmin, addNewAdmin, updateExistingAdmin, updateUserStatus, getAllApplicants, addAssessmentTimer, logoutAdmin } = require("./admin");
 
 module.exports = {
   addNewUser,
@@ -31,5 +31,6 @@ module.exports = {
   updateUserStatus,
   getAllApplicants,
   addAssessmentTimer,
-  assessmentTime
+  assessmentTime,
+  logoutAdmin
 };
