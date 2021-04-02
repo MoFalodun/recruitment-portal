@@ -2,9 +2,9 @@ module.exports = {
     createApplicationTable: `CREATE TABLE IF NOT EXISTS timer (
             id SERIAL PRIMARY KEY,
             time TIME NOT NULL,
+            created_at TIMESTAMPTZ default now(),
+            updated_at TIMESTAMPTZ default now()
         );`,
-    insertApplicationTable: `INSERT INTO application_analysis (current_application)
-    SELECT COUNT(id) 
-    FROM user_info
-    `
-    };
+    insertTimer: 'INSERT INTO timer (time) values ($1)',
+    fetchTimer: 'SELECT time FROM timer'
+};

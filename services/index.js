@@ -9,10 +9,11 @@ const {
   getAllUsers,
   cloudinaryConfig,
   updateUserByApplication,
+  getTimer
   } = require("./user");
 
 const { addAdmin,
-  getAdminByEmail, updateAdminDetails, updateUserbyAdmin, fetchAllApplicants } = require("./admin")
+  getAdminByEmail, updateAdminDetails, updateUserbyAdmin, fetchAllApplicants, addTimer } = require("./admin")
 
 const { addQuestion, getQuestionByTitle, getQuestions } = require("./question");
 
@@ -34,5 +35,7 @@ module.exports = {
   updateAdminDetails,
   updateUserByApplication,
   updateUserbyAdmin,
-  fetchAllApplicants,  
+  fetchAllApplicants,
+  addTimer,
+  getTimer,
 };

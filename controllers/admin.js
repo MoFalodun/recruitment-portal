@@ -1,5 +1,5 @@
 const { addAdmin,
-    getAdminByEmail, updateAdminDetails, updateUserbyAdmin, getUserByEmail, fetchAllApplicants } = require("../services");
+    getAdminByEmail, updateAdminDetails, updateUserbyAdmin, getUserByEmail, fetchAllApplicants, addTimer } = require("../services");
 const { hashPassword, comparePassword, addDataToToken, verifyToken } = require("../utils");
 const addNewAdmin = async (req, res) => {
   try {
@@ -92,10 +92,30 @@ const getAllApplicants = async (req, res) => {
   }
 };
 
+const addAssessmentTimer = async (req, res) => {
+  console.log(req.body.time)
+  const { time } = req.body
+  try {
+    const timer = await addTimer(time);
+    res
+      .status(201)
+      .json({
+        status: "success",
+        message: "Assessment Timer added successfully ",
+        data: timer,
+      });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ status: "fail", message: "Something went wrong." });
+  }
+};
+
+
 module.exports = {
     loginAdmin,
     addNewAdmin,
     updateExistingAdmin,
     updateUserStatus,
-    getAllApplicants
+    getAllApplicants,
+    addAssessmentTimer,
 }

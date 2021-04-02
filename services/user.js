@@ -13,7 +13,7 @@ const {
   updateUserPasswordById,
   updateUserInfo,
 } = require("../db/queries/user");
-const { insertApplicationTable } = require("../db/queries/computation")
+const { fetchTimer } = require("../db/queries/computation")
 
 const addUser = async (data) => {
   const id = generateUUID;
@@ -82,6 +82,8 @@ const updateUserPassword = async (data, email) => {
   return db.one(updateUserPasswordById, [password, email]);
 };
 
+const getTimer = async () => db.oneOrNone(fetchTimer)
+
 module.exports = {
   addUser,
   getUserById,
@@ -93,4 +95,5 @@ module.exports = {
   getUserApplicationByEmail,
   cloudinaryConfig,
   updateUserByApplication,
+  getTimer,
 };

@@ -7,6 +7,7 @@ const {
   updateUserPassword,
   getUserById,
   updateUserByApplication,
+  getTimer,
   
 } = require("../services");
 const session = require('express-session');
@@ -177,6 +178,22 @@ const allUsers = async (req, res) => {
     });
   }
 };
+const assessmentTime = async (req, res) => {
+  try {
+    const Timer = await getTimer();
+    res.status(200).json({
+      status: "success",
+      message: "Timer fetched successfully.",
+      data: Timer,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      status: "fail",
+      message: "Something went wrong ",
+    });
+  }
+};
 
 
 //changed
@@ -282,4 +299,5 @@ module.exports = {
   logoutUser,
   updateUser,
   getUser,
+  assessmentTime,
 };

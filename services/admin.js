@@ -2,6 +2,7 @@ const db = require("../db/setup");
 const { generateUUID } = require("../utils");
 const { insertAdmin, fetchAdminByEmail, updateAdmin, updateUserStatusbyID } = require("../db/queries/admin");
 const { fetchAllUsers } = require("../db/queries/user")
+const { insertTimer } = require("../db/queries/computation")
 
 const addAdmin = async (data) => {
     const id = generateUUID;
@@ -16,6 +17,11 @@ const addAdmin = async (data) => {
       address,
       password,
     ]);
+};
+
+const addTimer = async (time) => {
+  // const { time } = data;
+return db.oneOrNone(insertTimer, [time]);
 };
 
 const getAdminByEmail = async (email) => db.oneOrNone(fetchAdminByEmail, [email]);
@@ -38,4 +44,5 @@ module.exports = {
     updateAdminDetails,
     updateUserbyAdmin,
     fetchAllApplicants,
+    addTimer,
 }

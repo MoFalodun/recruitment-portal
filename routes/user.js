@@ -2,7 +2,7 @@ const { Router } = require('express');
 const { validateSignup,
     checkIfUserExists, validateLogin, validateQuestions, authenticate, adminAccessValidator, checkIfQuestionExists, validateApplication, authenticateEmail, checkForUserProfile, isAuth, cloudinaryUpload, validatePasswordUpdate} = require('../middlewares');
 const {
-    addNewUser, loginUser, addNewQuestion, addNewApplication, allUsers, getAllQuestion, resetPassword, updatePassword, logoutUser, updateUser, getUser
+    addNewUser, loginUser, addNewQuestion, addNewApplication, allUsers, getAllQuestion, resetPassword, updatePassword, logoutUser, updateUser, getUser, assessmentTime
 } = require('../controllers');
 
 const userRouter = Router();
@@ -27,5 +27,6 @@ userRouter.put('/resetPassword/:token', validatePasswordUpdate, updatePassword)
 userRouter.post('/logout', logoutUser)
 // to get a single logged in User
 userRouter.get('/singleUser', getUser)
+userRouter.get('/timer', authenticate, assessmentTime)
 
 module.exports = { userRouter }
