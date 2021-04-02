@@ -36,6 +36,6 @@ adminRouter.post(
 adminRouter.put('/update', adminAccessValidator, validateAdminUpdate, updateExistingAdmin )
 adminRouter.put('/updateUser/:id', adminAccessValidator, checkIfApplicantExists, updateUserStatus)
 adminRouter.get('/applicants', adminAccessValidator, getAllApplicants)
-adminRouter.post('/setTime', adminAccessValidator, addAssessmentTimer)
+adminRouter.post('/setTime', addAssessmentTimer)
 
 module.exports = { adminRouter };

@@ -1,7 +1,7 @@
 module.exports = {
     createApplicationTable: `CREATE TABLE IF NOT EXISTS timer (
             id SERIAL PRIMARY KEY,
-            time TIME NOT NULL,
+            time REAL NOT NULL,
             created_at TIMESTAMPTZ default now(),
             updated_at TIMESTAMPTZ default now()
         );`,
