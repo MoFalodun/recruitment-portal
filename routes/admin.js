@@ -9,6 +9,7 @@ const {
   checkIfQuestionExists,
   validateAdminUpdate,
   checkIfApplicantExists,
+  checkTimerIsSet,
 } = require("../middlewares");
 const { loginAdmin, addNewAdmin, addNewQuestion, updateExistingAdmin, updateUserStatus, getAllApplicants, addAssessmentTimer, logoutAdmin } = require("../controllers");
 
@@ -36,7 +37,7 @@ adminRouter.post(
 adminRouter.put('/update', adminAccessValidator, validateAdminUpdate, updateExistingAdmin )
 adminRouter.put('/updateUser/:id', adminAccessValidator, checkIfApplicantExists, updateUserStatus)
 adminRouter.get('/applicants', adminAccessValidator, getAllApplicants)
-adminRouter.post('/setTime', addAssessmentTimer)
+adminRouter.post('/setTime', checkTimerIsSet, addAssessmentTimer)
 adminRouter.post('/admin/logout', logoutAdmin)
 
 module.exports = { adminRouter };

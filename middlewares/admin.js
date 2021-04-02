@@ -1,5 +1,5 @@
 const { signupAdminSchema, loginAdminSchema, updateAdminSchema } = require('../validation');
-const { getAdminByEmail, getApplicationByUser } = require('../services');
+const { getAdminByEmail, getApplicationByUser, getTimer } = require('../services');
 const validateAdminSignup = (req, res, next) => {
     try {
       const { error } = signupAdminSchema.validate(req.body);
@@ -66,10 +66,29 @@ const checkIfAdminExists = async (req, res, next) => {
     }
   };
 
+  const checkTimerIsSet = async (req, res, next) => {
+    try {
+      // const product = await fetchSingleProduct(req.params.productId)
+      // const user = await getUserById(req.user.Id)
+      const time = await getTimer();
+      
+      console.log(time);
+      if (time.length == 0) {
+        // console.log(req.user.id);
+        return next();
+      }
+      return res.status(403).json({ status: 'fail', message: 'You have already added a timer' });
+    } catch (error) {
+      console.log(error)
+      return res.status(500).json({ status: 'fail', message: 'Something went wrong.' });
+    }
+  };
+
   module.exports = {
     checkIfAdminExists,
     validateAdminLogin,
     validateAdminSignup,
     validateAdminUpdate,
-    checkIfApplicantExists
+    checkIfApplicantExists,
+    checkTimerIsSet
   }
