@@ -73,7 +73,7 @@ const checkIfAdminExists = async (req, res, next) => {
       const time = await getTimer();
       
       console.log(time);
-      if (time.length == 0) {
+      if (!time || time.length == 0) {
         // console.log(req.user.id);
         return next();
       }
