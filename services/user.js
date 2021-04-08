@@ -5,7 +5,6 @@ const {
   insertUser,
   fetchUserByEmail,
   fetchUserById,
-  updateUserById,
   insertUserApplication,
   fetchUserProfile,
   fetchAllUsers,
