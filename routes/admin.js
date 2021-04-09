@@ -35,7 +35,7 @@ adminRouter.post(
 );
 
 adminRouter.put('/update', adminAccessValidator, validateAdminUpdate, updateExistingAdmin )
-adminRouter.put('/updateUser/:id', adminAccessValidator, checkIfApplicantExists, updateUserStatus)
+adminRouter.put('/updateUser/:id', checkIfApplicantExists, updateUserStatus)
 adminRouter.get('/applicants', adminAccessValidator, getAllApplicants)
 adminRouter.post('/setTime', checkTimerIsSet, addAssessmentTimer)
 adminRouter.post('/admin/logout', logoutAdmin)

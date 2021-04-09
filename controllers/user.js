@@ -151,6 +151,7 @@ const loginUser = async (req, res) => {
 };
 
 const logoutUser = (req, res) => {
+  res.clearCookie("token");
   req.session.destroy((err) => {
     if (err){throw err};
     res.clearCookie("token");
