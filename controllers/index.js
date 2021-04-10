@@ -8,7 +8,8 @@ const {
   logoutUser,
   updateUser,
   getUser,
-  assessmentTime
+  assessmentTime,
+  updateUserScore
 } = require("./user");
 const { addNewQuestion, getAllQuestion } = require("./question");
 const { loginAdmin, addNewAdmin, updateExistingAdmin, updateUserStatus, getAllApplicants, addAssessmentTimer, logoutAdmin } = require("./admin");
@@ -32,5 +33,6 @@ module.exports = {
   getAllApplicants,
   addAssessmentTimer,
   assessmentTime,
-  logoutAdmin
+  logoutAdmin,
+  updateUserScore
 };

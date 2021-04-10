@@ -8,6 +8,7 @@ const {
   getUserById,
   updateUserByApplication,
   getTimer,
+  inputTestScore
   
 } = require("../services");
 const session = require('express-session');
@@ -57,6 +58,7 @@ const addNewApplication = async (req, res, next) => {
 
 const updateUser = async(req, res) => {
   try {
+    const { id } = req.params;
     // const { authorization } = req.headers;
     // const token = authorization.split(' ')[1];
     // const { err, data } = verifyToken(token);
@@ -66,8 +68,8 @@ const updateUser = async(req, res) => {
     //   return res.status(401).json({ status: "fail", message: "Invalid token" });
     // }
     // const user = data;
-    updatedApp = await updateUserByApplication()
-    // console.log(user)
+    const updatedApp = await updateUserByApplication(id)
+    console.log(updatedApp)
     // res.status(201).json({
     //   status: "success",
     //   message: "Update successful",
@@ -216,6 +218,19 @@ const singleUser = async (req, res) => {
   }
 };
 
+const updateUserScore = async (req, res) => {
+  try {
+    const applicant = req.user;
+    const updatedApplicant = await inputTestScore (req.body, applicant.user_id);
+    res
+      .status(201)
+      .json({ status: 'success', message: 'score added successfully.', data: updatedApplicant });
+} catch (error) {
+    console.log(error)
+  res.status(500).json({ status: 'fail', message: 'Something went wrong.' });
+}
+};
+
 const resetPassword = async (req, res) => {
   const password = process.env.PASS_WORD;
   let transporter = nodemailer.createTransport({
@@ -236,6 +251,45 @@ const resetPassword = async (req, res) => {
     });
     const mailOptions = await transporter.sendMail({
       from: '"Enyata " <mzdoopey10@gmail.com>', // sender address
+      to: email, // list of receivers
+      subject: "Reset Password", // Subject line
+      text: `<a href="http://localhost:8080/resetpassword/${userToken}">Reset password</a>`,
+      html: `<a href="http://localhost:8080/resetpassword/${userToken}">Reset password</a>`, // html body
+    });
+    res.status(200).json({
+      status: "success",
+      message: "password reset link sent successfully.",
+    });
+    console.log("Message sent: %s", mailOptions.messageId);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      status: "fail",
+      message: "Something went wrong ",
+    });
+  }
+};
+
+const signUpMessage = async (req, res) => {
+  const password = process.env.PASS_WORD;
+  let transporter = nodemailer.createTransport({
+    host: "smtp.gmail.com",
+    port: 587,
+    secure: false, // true for 465, false for other ports
+    auth: {
+      user: "mzdoopey10@gmail.com", // generated ethereal user
+      pass: password, // generated ethereal password
+    },
+  });
+  try {
+    const { email } = req.body;
+    // const userer = await getUserByEmail(email);
+    // const userToken = addDataToToken({
+    //   email,
+    //   id: userer.id,
+    // });
+    const mailOptions = await transporter.sendMail({
+      from: '"Enyata successful application" <mzdoopey10@gmail.com>', // sender address
       to: email, // list of receivers
       subject: "Reset Password", // Subject line
       text: `<a href="http://localhost:8080/resetpassword/${userToken}">Reset password</a>`,
@@ -301,4 +355,5 @@ module.exports = {
   updateUser,
   getUser,
   assessmentTime,
+  updateUserScore
 };

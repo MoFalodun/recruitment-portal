@@ -6,5 +6,5 @@ module.exports = {
             updated_at TIMESTAMPTZ default now()
         );`,
     insertTimer: 'INSERT INTO timer (time) values ($1)',
-    fetchTimer: 'SELECT time FROM timer'
+    fetchTimer: 'SELECT time FROM timer ORDER BY id DESC LIMIT 1'
 };
