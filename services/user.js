@@ -11,6 +11,7 @@ const {
   fetchUserApplicationByEmail,
   updateUserPasswordById,
   updateUserInfo,
+  updateUserScorebyID
 } = require("../db/queries/user");
 const { fetchTimer } = require("../db/queries/computation")
 
@@ -52,8 +53,8 @@ const addUserApplication = async (data) => {
   ]);
 };
 
-const updateUserByApplication = async ()=> {
-  db.manyOrNone(updateUserInfo);
+const updateUserByApplication = async (userId)=> {
+  db.manyOrNone(updateUserInfo, [userId]);
 };
 
 const cloudinaryConfig = async (cvPath) => {
@@ -81,7 +82,18 @@ const updateUserPassword = async (data, email) => {
   return db.one(updateUserPasswordById, [password, email]);
 };
 
-const getTimer = async () => db.oneOrNone(fetchTimer)
+const inputTestScore = async ({ data }, userId) => {
+  let count = 0;
+  for (const item of data.chosenAnswers) {
+    const answer = data.correctAnswers.find((el) => el.question_id === item.question_id);
+    if (item.correct_option === answer.correct_option) {
+      count += 1;
+    }
+  }
+  return db.one(updateUserScorebyID, [count, userId]);
+};
+
+const getTimer = async () => db.manyOrNone(fetchTimer)
 
 module.exports = {
   addUser,
@@ -95,4 +107,5 @@ module.exports = {
   cloudinaryConfig,
   updateUserByApplication,
   getTimer,
+  inputTestScore
 };

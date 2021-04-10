@@ -67,7 +67,7 @@ const updateExistingAdmin = async (req, res) => {
 }
 };
 
-const updateUserStatus = async (req, res) => {
+const updateUserStatus = async (req, res, next) => {
   try {
     const { id } = req.params;
     // const userToBeUpdated = await getUserByEmail(email)

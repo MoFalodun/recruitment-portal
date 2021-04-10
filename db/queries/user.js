@@ -82,6 +82,13 @@ module.exports = {
   WHERE user_id = $2
   RETURNING *;`,
 
+  updateUserScorebyID: `UPDATE user_application
+  SET
+  score = $1,
+    updated_at = NOW()
+  WHERE user_id = $2
+  RETURNING *;`,
+
 updateUserInfo: `UPDATE user_info
 SET 
 date_of_birth =( SELECT user_application.date_of_birth FROM user_application WHERE user_application.user_id =user_info.id),

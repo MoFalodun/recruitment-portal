@@ -11,7 +11,7 @@ const {
   checkIfApplicantExists,
   checkTimerIsSet,
 } = require("../middlewares");
-const { loginAdmin, addNewAdmin, addNewQuestion, updateExistingAdmin, updateUserStatus, getAllApplicants, addAssessmentTimer, logoutAdmin } = require("../controllers");
+const { loginAdmin, addNewAdmin, addNewQuestion, updateExistingAdmin, updateUserStatus, getAllApplicants, addAssessmentTimer, logoutAdmin, updateUser} = require("../controllers");
 
 const adminRouter = Router();
 
@@ -35,7 +35,7 @@ adminRouter.post(
 );
 
 adminRouter.put('/update', adminAccessValidator, validateAdminUpdate, updateExistingAdmin )
-adminRouter.put('/updateUser/:id', checkIfApplicantExists, updateUserStatus)
+adminRouter.put('/updateUser/:id', checkIfApplicantExists, updateUserStatus, updateUser)
 adminRouter.get('/applicants', adminAccessValidator, getAllApplicants)
 adminRouter.post('/setTime', checkTimerIsSet, addAssessmentTimer)
 adminRouter.post('/admin/logout', logoutAdmin)
