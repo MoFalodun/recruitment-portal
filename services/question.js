@@ -5,7 +5,7 @@ const { insertQuestions, fetchQuestionsByTitle, fetchAllQuestions, fetchQuestion
 const addQuestion= async (data) => {
     const id = generateUUID;
     const { title, picture, optionA, optionB, optionC, optionD, correctAnswer } = data;
-    return db.one(insertQuestions, [id, title, picture, optionA, optionB, optionC, optionD, correctAnswer ])
+    return db.manyOrNone(insertQuestions, [id, title, picture, optionA, optionB, optionC, optionD, correctAnswer ])
 }
 
 const getQuestionByTitle = async (title) => db.oneOrNone(fetchQuestionsByTitle, [title])

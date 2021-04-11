@@ -16,7 +16,7 @@ module.exports = {
 
   insertQuestions: `
     INSERT INTO questions
-      ( id, picture, title, option_a, option_b, option_c, option_d, correct_answer) 
+      ( id, title, picture, option_a, option_b, option_c, option_d, correct_answer) 
     VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
     RETURNING *;
   `,
