@@ -34,8 +34,8 @@ const updateUserbyAdmin = async(data, userID) => {
 const fetchAllApplicants = async () => db.manyOrNone(fetchAllUsers)
 
 const updateAdminDetails = async (data, email) => {
-  const { name, phoneNumber, country, address } = data;
-  return db.one(updateAdmin, [name, phoneNumber, country, address, email])
+  const { name, phoneNumber, country, address, picture } = data;
+  return db.one(updateAdmin, [name, phoneNumber, country, address, picture, email])
 }
 
 module.exports = {

@@ -258,7 +258,7 @@ const resetPassword = async (req, res,) => {
     });
     res.status(200).json({
       status: "success",
-      message: "password reset link sent successfully.",
+      message: "Password reset link sent successfully.",
     });
     console.log("Message sent: %s", mailOptions.messageId);
   } catch (error) {

@@ -39,8 +39,9 @@ module.exports = {
   phone_number = $2,
   country = $3,
   address = $4,
+  picture = $5,
   updated_at = NOW()
-  WHERE email = $5
+  WHERE email = $6
   RETURNING *;`,
 
   updateUserStatusbyID: `UPDATE user_application

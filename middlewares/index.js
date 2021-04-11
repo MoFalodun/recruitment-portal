@@ -4,7 +4,7 @@ const { validateQuestions, checkIfQuestionExists } = require("./question");
 const { checkIfAdminExists,
   validateAdminLogin,
   validateAdminSignup, validateAdminUpdate, checkIfApplicantExists, checkTimerIsSet } = require("./admin");
-const { cloudinaryUpload } = require('./upload');
+const { cloudinaryUpload, cloudinaryAdminUpload } = require('./upload');
 
 module.exports = {
   authenticate,
@@ -26,4 +26,5 @@ module.exports = {
   checkIfApplicantExists,
   validatePasswordUpdate,
   checkTimerIsSet,
+  cloudinaryAdminUpload,
 };

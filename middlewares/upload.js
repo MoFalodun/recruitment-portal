@@ -44,7 +44,22 @@ const cloudinaryUpload = async (req, res, next) => {
       console.log(error);
     }
   };
+
+  const cloudinaryAdminUpload = async (req, res, next) => {
+    try {
+        console.log(req.files)
+        const [photoData] = await Promise.all([
+            cloudinaryConfig(req.files.photo.tempFilePath),
+          ]);
+          req.body.picture = photoData.secure_url;
+          console.log(photoData.secure_url)
+          next();
+    } catch (error) {
+      console.log(error);
+    }
+  };
  
 module.exports = {
     cloudinaryUpload,
+    cloudinaryAdminUpload
 }
