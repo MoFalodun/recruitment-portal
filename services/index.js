@@ -14,7 +14,7 @@ const {
   } = require("./user");
 
 const { addAdmin,
-  getAdminByEmail, updateAdminDetails, updateUserbyAdmin, fetchAllApplicants, addTimer } = require("./admin")
+  getAdminByEmail, updateAdminDetails, updateUserbyAdmin, fetchAllApplicants, addTimer, fetchAllthatApplied } = require("./admin")
 
 const { addQuestion, getQuestionByTitle, getQuestions, getQuestionsByID } = require("./question");
 
@@ -40,5 +40,6 @@ module.exports = {
   addTimer,
   getTimer,
   getQuestionsByID,
-  inputTestScore
+  inputTestScore,
+  fetchAllthatApplied,
 };

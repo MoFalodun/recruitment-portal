@@ -1,5 +1,5 @@
 const { addAdmin,
-    getAdminByEmail, updateAdminDetails, updateUserbyAdmin, getUserByEmail, fetchAllApplicants, addTimer } = require("../services");
+    getAdminByEmail, updateAdminDetails, updateUserbyAdmin, getUserByEmail, fetchAllApplicants, addTimer, fetchAllthatApplied } = require("../services");
 const { hashPassword, comparePassword, addDataToToken, verifyToken } = require("../utils");
 const addNewAdmin = async (req, res) => {
   try {
@@ -93,6 +93,17 @@ const getAllApplicants = async (req, res) => {
   }
 };
 
+const getAllThatApplied = async (req, res) => {
+  try {
+    
+    const allApplicants = await fetchAllthatApplied();
+    res.status(200).json({ status: 'success', message: 'applicants fetched successfully', data: allApplicants });
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({ status: 'fail', message: 'Something went wrong.' });
+  }
+};
+
 const addAssessmentTimer = async (req, res) => {
   console.log(req.body.time)
   const { time } = req.body
@@ -131,4 +142,5 @@ module.exports = {
     getAllApplicants,
     addAssessmentTimer,
     logoutAdmin,
+    getAllThatApplied
 }

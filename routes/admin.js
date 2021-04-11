@@ -12,7 +12,7 @@ const {
   checkTimerIsSet,
   cloudinaryAdminUpload
 } = require("../middlewares");
-const { loginAdmin, addNewAdmin, addNewQuestion, updateExistingAdmin, updateUserStatus, getAllApplicants, addAssessmentTimer, logoutAdmin, updateUser} = require("../controllers");
+const { loginAdmin, addNewAdmin, addNewQuestion, updateExistingAdmin, updateUserStatus, getAllApplicants, addAssessmentTimer, logoutAdmin, updateUser, getAllThatApplied} = require("../controllers");
 
 const adminRouter = Router();
 
@@ -39,6 +39,7 @@ adminRouter.post(
 adminRouter.put('/update', adminAccessValidator, cloudinaryAdminUpload, validateAdminUpdate, updateExistingAdmin )
 adminRouter.put('/updateUser/:id', checkIfApplicantExists, updateUserStatus, updateUser)
 adminRouter.get('/applicants', adminAccessValidator, getAllApplicants)
+adminRouter.get('/allApplicants', adminAccessValidator, getAllThatApplied)
 adminRouter.post('/setTime', addAssessmentTimer)
 adminRouter.post('/admin/logout', logoutAdmin)
 

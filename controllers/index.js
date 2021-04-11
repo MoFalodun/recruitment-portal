@@ -13,7 +13,7 @@ const {
   signUpMessage,
 } = require("./user");
 const { addNewQuestion, getAllQuestion } = require("./question");
-const { loginAdmin, addNewAdmin, updateExistingAdmin, updateUserStatus, getAllApplicants, addAssessmentTimer, logoutAdmin } = require("./admin");
+const { loginAdmin, addNewAdmin, updateExistingAdmin, updateUserStatus, getAllApplicants, addAssessmentTimer, logoutAdmin, getAllThatApplied } = require("./admin");
 
 module.exports = {
   addNewUser,
@@ -37,4 +37,5 @@ module.exports = {
   logoutAdmin,
   welcomeMessage,
   signUpMessage,
+  getAllThatApplied,
 };
