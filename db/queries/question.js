@@ -3,6 +3,7 @@ module.exports = {
   CREATE TABLE IF NOT EXISTS questions (
     id uuid PRIMARY KEY,
     title varchar unique not null,
+    picture varchar,
     option_a varchar not null,
     option_b varchar not null,
     option_c varchar not null,
@@ -15,17 +16,17 @@ module.exports = {
 
   insertQuestions: `
     INSERT INTO questions
-      ( id, title, option_a, option_b, option_c, option_d, correct_answer) 
-    VALUES ($1, $2, $3, $4, $5, $6, $7)
+      ( id, picture, title, option_a, option_b, option_c, option_d, correct_answer) 
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
     RETURNING *;
   `,
 
-  fetchAllQuestions: 'SELECT id, title, option_a, option_b, option_c, option_d FROM questions',
-  fetchQuestionsByTitle: 'SELECT id, title, option_a, option_b, option_c, option_d FROM questions WHERE title = $1',
+  fetchAllQuestions: 'SELECT id, title, picture, option_a, option_b, option_c, option_d FROM questions',
+  fetchQuestionsByTitle: 'SELECT id, title, picture, option_a, option_b, option_c, option_d FROM questions WHERE title = $1',
 
   deleteQuestionsById: 'DELETE FROM questions WHERE id = $1',
   fetchQuestionsByID: 'SELECT id, correct_answer FROM questions WHERE id = $1',
 
-  fetchQuestions: 'SELECT id, title, option_a, option_b, option_c, option_d FROM questions',
+  fetchQuestions: 'SELECT id, title, picture, option_a, option_b, option_c, option_d FROM questions',
 
 };
