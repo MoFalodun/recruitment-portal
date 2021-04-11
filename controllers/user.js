@@ -231,7 +231,7 @@ const updateUserScore = async (req, res) => {
 }
 };
 
-const resetPassword = async (req, res) => {
+const resetPassword = async (req, res,) => {
   const password = process.env.PASS_WORD;
   let transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
@@ -270,7 +270,46 @@ const resetPassword = async (req, res) => {
   }
 };
 
-const signUpMessage = async (req, res) => {
+const welcomeMessage = async (req, res,) => {
+  const password = process.env.PASS_WORD;
+  let transporter = nodemailer.createTransport({
+    host: "smtp.gmail.com",
+    port: 587,
+    secure: false, // true for 465, false for other ports
+    auth: {
+      user: "mzdoopey10@gmail.com", // generated ethereal user
+      pass: password, // generated ethereal password
+    },
+  });
+  try {
+    const { email } = req.body;
+    const userer = await getUserByEmail(email);
+    const userToken = addDataToToken({
+      email,
+      id: userer.id,
+    });
+    const mailOptions = await transporter.sendMail({
+      from: '"Enyata " <mzdoopey10@gmail.com>', // sender address
+      to: email, // list of receivers
+      subject: "Reset Password", // Subject line
+      text: `<a href="http://localhost:8080/resetpassword/${userToken}">Reset password</a>`,
+      html: `<a href="http://localhost:8080/resetpassword/${userToken}">Reset password</a>`, // html body
+    });
+    res.status(200).json({
+      status: "success",
+      message: "password reset link sent successfully.",
+    });
+    console.log("Message sent: %s", mailOptions.messageId);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      status: "fail",
+      message: "Something went wrong ",
+    });
+  }
+};
+
+const signUpMessage = async (req, res, next) => {
   const password = process.env.PASS_WORD;
   let transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
@@ -292,20 +331,21 @@ const signUpMessage = async (req, res) => {
       from: '"Enyata successful application" <mzdoopey10@gmail.com>', // sender address
       to: email, // list of receivers
       subject: "Reset Password", // Subject line
-      text: `<a href="http://localhost:8080/resetpassword/${userToken}">Reset password</a>`,
-      html: `<a href="http://localhost:8080/resetpassword/${userToken}">Reset password</a>`, // html body
+      text: `<p>Thank you for signing up to Enyata's website. If you haven't applied for the academy, Kindly click the link to <a href="http://localhost:8080">apply</a> </p>`,
+      html: `<p>Thank you for signing up to Enyata's website. If you haven't applied for the academy, Kindly click the link to <a href="http://localhost:8080">apply</a> </p>`, // html body
     });
-    res.status(200).json({
-      status: "success",
-      message: "password reset link sent successfully.",
-    });
+    //  res.status(200).json({
+    //   status: "success",
+    //   message: "SignUp link sent successfully.",
+    // });
     console.log("Message sent: %s", mailOptions.messageId);
+    next();
   } catch (error) {
     console.log(error);
-    res.status(500).json({
-      status: "fail",
-      message: "Something went wrong ",
-    });
+    // res.status(500).json({
+    //   status: "fail",
+    //   message: "Something went wrong ",
+    // });
   }
 };
 
@@ -355,5 +395,7 @@ module.exports = {
   updateUser,
   getUser,
   assessmentTime,
-  updateUserScore
+  updateUserScore,
+  signUpMessage,
+  welcomeMessage,
 };

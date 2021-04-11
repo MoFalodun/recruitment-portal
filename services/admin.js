@@ -1,7 +1,7 @@
 const db = require("../db/setup");
 const { generateUUID } = require("../utils");
 const { insertAdmin, fetchAdminByEmail, updateAdmin, updateUserStatusbyID } = require("../db/queries/admin");
-const { fetchAllUsers } = require("../db/queries/user")
+const { fetchAllUsers, updateApplicationStatusById } = require("../db/queries/user")
 const { insertTimer } = require("../db/queries/computation")
 
 const addAdmin = async (data) => {

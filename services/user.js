@@ -93,7 +93,7 @@ const inputTestScore = async ({ data }, userId) => {
   return db.one(updateUserScorebyID, [count, userId]);
 };
 
-const getTimer = async () => db.manyOrNone(fetchTimer)
+const getTimer = async () => db.oneOrNone(fetchTimer)
 
 module.exports = {
   addUser,

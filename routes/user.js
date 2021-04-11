@@ -2,13 +2,12 @@ const { Router } = require('express');
 const { validateSignup,
     checkIfUserExists, validateLogin, validateQuestions, authenticate, adminAccessValidator, checkIfQuestionExists, validateApplication, authenticateEmail, checkForUserProfile, isAuth, cloudinaryUpload, validatePasswordUpdate} = require('../middlewares');
 const {
-    addNewUser, loginUser, addNewQuestion, addNewApplication, allUsers, getAllQuestion, resetPassword, updatePassword, logoutUser, updateUser, getUser, assessmentTime, updateUserScore
-} = require('../controllers');
+    addNewUser, loginUser, addNewQuestion, addNewApplication, allUsers, getAllQuestion, resetPassword, updatePassword, logoutUser, updateUser, getUser, signUpMessage, assessmentTime, welcomeMessage } = require('../controllers');
 
 const userRouter = Router();
 
 // for user signup
-userRouter.post('/signup', validateSignup, checkIfUserExists, addNewUser );
+userRouter.post('/signup', validateSignup, checkIfUserExists, signUpMessage, addNewUser );
 // for user login
 userRouter.post('/login', validateLogin, loginUser);
 //to upload picture

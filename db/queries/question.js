@@ -24,6 +24,7 @@ module.exports = {
   fetchQuestionsByTitle: 'SELECT id, title, option_a, option_b, option_c, option_d FROM questions WHERE title = $1',
 
   deleteQuestionsById: 'DELETE FROM questions WHERE id = $1',
+  fetchQuestionsByID: 'SELECT id, correct_answer FROM questions WHERE id = $1',
 
   fetchQuestions: 'SELECT id, title, option_a, option_b, option_c, option_d FROM questions',
 

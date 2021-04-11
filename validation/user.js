@@ -26,7 +26,9 @@ const applicationSchema = Joi.object({
 });
 
 const updatePasswordSchema = Joi.object({
-  password: Joi.string().min(7).required()
+  password: Joi.string().min(7).required(),
+  confirmPassword: Joi.string().valid(Joi.ref('password')).required(),
+
 });
 
 module.exports = {
