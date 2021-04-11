@@ -321,7 +321,7 @@ const signUpMessage = async (req, res, next) => {
     },
   });
   try {
-    const { email } = req.body;
+    const { email, firstName } = req.body;
     // const userer = await getUserByEmail(email);
     // const userToken = addDataToToken({
     //   email,
@@ -330,9 +330,9 @@ const signUpMessage = async (req, res, next) => {
     const mailOptions = await transporter.sendMail({
       from: '"Enyata successful application" <mzdoopey10@gmail.com>', // sender address
       to: email, // list of receivers
-      subject: "Reset Password", // Subject line
-      text: `<p>Thank you for signing up to Enyata's website. If you haven't applied for the academy, Kindly click the link to <a href="http://localhost:8080">apply</a> </p>`,
-      html: `<p>Thank you for signing up to Enyata's website. If you haven't applied for the academy, Kindly click the link to <a href="http://localhost:8080">apply</a> </p>`, // html body
+      subject: "Welcome Message", // Subject line
+      text: `<p>Dear ${firstName}, <br><br> Thank you for signing up to Enyata's website. If you haven't applied for the academy, Kindly click this link to <a href="http://localhost:8080">apply</a> </p>`,
+      html: `<p>Dear ${firstName}, <br><br> Thank you for signing up to Enyata's website. If you haven't applied for the academy, Kindly click this link to <a href="http://localhost:8080">apply</a> </p>`, // html body
     });
     //  res.status(200).json({
     //   status: "success",
