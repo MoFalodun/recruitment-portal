@@ -328,11 +328,11 @@ const signUpMessage = async (req, res, next) => {
     //   id: userer.id,
     // });
     const mailOptions = await transporter.sendMail({
-      from: '"Enyata successful application" <mzdoopey10@gmail.com>', // sender address
+      from: '"Enyata successful signUp" <mzdoopey10@gmail.com>', // sender address
       to: email, // list of receivers
       subject: "Welcome Message", // Subject line
-      text: `<p>Dear ${firstName}, <br><br> Thank you for signing up to Enyata's website. If you haven't applied for the academy, Kindly click this link to <a href="http://localhost:8080">apply</a> </p>`,
-      html: `<p>Dear ${firstName}, <br><br> Thank you for signing up to Enyata's website. If you haven't applied for the academy, Kindly click this link to <a href="http://localhost:8080">apply</a> </p>`, // html body
+      text: `<p>Dear ${firstName}, <br><br> Thank you for signing up to Enyata's website. If you haven't applied for the academy, Kindly click this link to <a href="http://localhost:8080/userLogin">apply</a> </p>`,
+      html: `<p>Dear ${firstName}, <br><br> Thank you for signing up to Enyata's website. If you haven't applied for the academy, Kindly click this link to <a href="http://localhost:8080/userLogin">apply</a> </p>`, // html body
     });
     //  res.status(200).json({
     //   status: "success",
