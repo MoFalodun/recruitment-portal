@@ -30,6 +30,7 @@ adminRouter.post("/admin/login", validateAdminLogin, loginAdmin);
 adminRouter.post(
   "/admin/createQuestion",
   adminAccessValidator,
+  cloudinaryAdminUpload,
   validateQuestions,
   checkIfQuestionExists,
   addNewQuestion
