@@ -220,8 +220,8 @@ const singleUser = async (req, res) => {
 
 const updateUserScore = async (req, res) => {
   try {
-    const applicant = req.user;
-    const updatedApplicant = await inputTestScore (req.body, applicant.user_id);
+    const { user_id } = req.user
+    const updatedApplicant = await inputTestScore (req.body, user_id);
     res
       .status(201)
       .json({ status: 'success', message: 'score added successfully.', data: updatedApplicant });
