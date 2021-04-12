@@ -220,13 +220,15 @@ const singleUser = async (req, res) => {
 
 const updateUserScore = async (req, res) => {
   try {
-    const { user_id } = req.user
-    const updatedApplicant = await inputTestScore (req.body, user_id);
+    const { id } = req.user
+    const updatedApplicant = await inputTestScore(req.body, id);
+    console.log(req.body)
     res
       .status(201)
       .json({ status: 'success', message: 'score added successfully.', data: updatedApplicant });
 } catch (error) {
     console.log(error)
+    console.log(req.body)
   res.status(500).json({ status: 'fail', message: 'Something went wrong.' });
 }
 };

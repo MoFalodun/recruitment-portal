@@ -82,10 +82,12 @@ const updateUserPassword = async (data, email) => {
   return db.one(updateUserPasswordById, [password, email]);
 };
 
-const inputTestScore = async ({ data }, userId) => {
+const inputTestScore = async (data, userId) => {
   let count = 0;
+  console.log(">>>>" ,data.data)
   for (const item of data.chosenAnswers) {
-    const answer = data.correctAnswers.find((el) => el.question_id === item.question_id);
+    const answer = data.correctAnswers.find((el) => el.id === item.question_id);
+
     if (item.correct_option === answer.correct_option) {
       count += 1;
     }
