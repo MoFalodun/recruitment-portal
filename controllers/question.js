@@ -2,6 +2,7 @@ const { addQuestion, getQuestions, getQuestionsByID } = require("../services");
 
 const addNewQuestion = async (req, res) => {
   try {
+    console.log(req.body);
     const newQuestion = await addQuestion(req.body);
     res
       .status(201)
@@ -11,7 +12,7 @@ const addNewQuestion = async (req, res) => {
         data: newQuestion,
       });
   } catch (error) {
-    console.log(error);
+    console.log('>>>>>error', error);
     res.status(500).json({ status: "fail", message: "Something went wrong." });
   }
 };

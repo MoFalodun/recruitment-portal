@@ -3,11 +3,14 @@ const { generateUUID } = require('../utils');
 const { insertQuestions, fetchQuestionsByTitle, fetchAllQuestions, fetchQuestionsByID } = require('../db/queries/question')
 
 const addQuestion= async (data) => {
-    const id = generateUUID;
-    const { title, picture, optionA, optionB, optionC, optionD, correctAnswer } = data;
-    return db.manyOrNone(insertQuestions, [id, title, picture, optionA, optionB, optionC, optionD, correctAnswer ])
+   const questions = await data.questions.map(  el => {
+    const id = generateUUID()
+   return   db.one(insertQuestions, [id, el.title, el.picture, el.optionA, el.optionB, el.optionC, el.optionD, el.correctAnswer ])
+})
+const dd = await Promise.all(questions);
+console.log(dd);
+return dd;
 }
-
 const getQuestionByTitle = async (title) => db.oneOrNone(fetchQuestionsByTitle, [title])
 
 const getQuestions = async () => db.manyOrNone(fetchAllQuestions)
