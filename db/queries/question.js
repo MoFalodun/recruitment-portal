@@ -21,7 +21,7 @@ module.exports = {
     RETURNING *;
   `,
 
-  fetchAllQuestions: 'SELECT id, title, picture, option_a, option_b, option_c, correct_answer option_d FROM questions',
+  fetchAllQuestions: 'SELECT id, title, option_a, option_b, option_c, option_d FROM questions LIMIT 10',
   fetchQuestionsByTitle: 'SELECT id, title, picture, option_a, option_b, option_c, option_d FROM questions WHERE title = $1',
 
   deleteQuestionsById: 'DELETE FROM questions WHERE id = $1',
