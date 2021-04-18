@@ -10,7 +10,8 @@ const {
   cloudinaryConfig,
   updateUserByApplication,
   getTimer,
-  inputTestScore
+  inputTestScore,
+  getQuestionsAndAnswers
   } = require("./user");
 
 const { addAdmin,
@@ -42,4 +43,5 @@ module.exports = {
   getQuestionsByID,
   inputTestScore,
   fetchAllthatApplied,
+  getQuestionsAndAnswers
 };

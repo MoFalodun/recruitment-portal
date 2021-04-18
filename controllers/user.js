@@ -8,7 +8,8 @@ const {
   getUserById,
   updateUserByApplication,
   getTimer,
-  inputTestScore
+  inputTestScore,
+  getQuestionsAndAnswers
   
 } = require("../services");
 const session = require('express-session');
@@ -220,9 +221,19 @@ const singleUser = async (req, res) => {
 
 const updateUserScore = async (req, res) => {
   try {
+    let count = 0;
     const { id } = req.user
-    const updatedApplicant = await inputTestScore(req.body, id);
-    console.log(req.body)
+    const chosenAnsers  = req.body
+    const answers = await getQuestionsAndAnswers();
+    let ok = []
+    for (const item of chosenAnsers) {
+      const answer = answers.find((el) => el.id === item.id);
+      console.log(item.id);
+      if (item.value === answer.correct_answer) {
+        count += 1;
+      }
+    }
+    const updatedApplicant = await inputTestScore(count, id);
     res
       .status(201)
       .json({ status: 'success', message: 'score added successfully.', data: updatedApplicant });

@@ -13,6 +13,7 @@ const {
   updateUserInfo,
   updateUserScorebyID
 } = require("../db/queries/user");
+const { fetchQuestions } = require("../db/queries/question")
 const { fetchTimer } = require("../db/queries/computation")
 
 const addUser = async (data) => {
@@ -82,16 +83,24 @@ const updateUserPassword = async (data, email) => {
   return db.one(updateUserPasswordById, [password, email]);
 };
 
-const inputTestScore = async (data, userId) => {
-  let count = 0;
-  console.log(">>>>" ,data.data)
-  for (const item of data.chosenAnswers) {
-    const answer = data.correctAnswers.find((el) => el.id === item.question_id);
+const getQuestionsAndAnswers = async () => db.manyOrNone(fetchQuestions)
 
-    if (item.correct_option === answer.correct_option) {
-      count += 1;
-    }
-  }
+const inputTestScore = async (count, userId) => {
+  // let count = 0;
+  // console.log(">>>>" ,data)
+  // let questions = []
+  // for ( i in data.chosenAnswers){
+  //   questions.push( await db.many(fetchQuestions))
+  // } 
+  // console.log(">>>", questions);
+  // console.log(fetchQuestions);
+  // for (const item of data.chosenAnswers) {
+  //   const answer = data.correctAnswers.find((el) => el.id === item.question_id);
+  //   // console.log(answer)
+  //   if (item.correct_option === answer.correct_option) {
+  //     count += 1;
+  //   }
+  // }
   return db.one(updateUserScorebyID, [count, userId]);
 };
 
@@ -109,5 +118,6 @@ module.exports = {
   cloudinaryConfig,
   updateUserByApplication,
   getTimer,
-  inputTestScore
+  inputTestScore,
+  getQuestionsAndAnswers
 };

@@ -21,12 +21,12 @@ module.exports = {
     RETURNING *;
   `,
 
-  fetchAllQuestions: 'SELECT id, title, picture, option_a, option_b, option_c, option_d FROM questions',
+  fetchAllQuestions: 'SELECT id, title, picture, option_a, option_b, option_c, correct_answer option_d FROM questions',
   fetchQuestionsByTitle: 'SELECT id, title, picture, option_a, option_b, option_c, option_d FROM questions WHERE title = $1',
 
   deleteQuestionsById: 'DELETE FROM questions WHERE id = $1',
   fetchQuestionsByID: 'SELECT id, correct_answer FROM questions WHERE id = $1',
 
-  fetchQuestions: 'SELECT id, title, picture, option_a, option_b, option_c, option_d FROM questions',
+  fetchQuestions: 'SELECT id, correct_answer FROM questions',
 
 };
